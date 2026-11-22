@@ -197,7 +197,7 @@
     }
     .export-box textarea {
       width: 100%;
-      min-height: 150px;
+      min-height: 165px;
       padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid var(--border);
@@ -213,6 +213,11 @@
       color: #24592c;
       font-weight: 600;
       margin-left: 8px;
+    }
+    .hint {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 10px;
     }
 
     @media (max-width: 820px) {
@@ -233,7 +238,7 @@
   <main class="container" style="padding-bottom: 64px;">
     <div class="page-title">
       <h1>Zarządzanie rezerwacjami</h1>
-      <p>Panel dodawania i usuwania wpisów dostępności dla ścieżki <code>/rezerwacje/index.html</code>. Możesz też wyeksportować wpisy do pliku <code>dostepnosc.js</code>.</p>
+      <p>Jedynym źródłem danych jest plik <code>dostepnosc.js</code> (bez <code>localStorage</code>). Zmiany zapisujesz bezpośrednio do pliku <code>dostepnosc.js</code> (przez File System Access API lub pobranie/skopiowanie pliku).</p>
     </div>
 
     <div class="grid-2">
@@ -257,33 +262,35 @@
           </div>
 
           <div class="actions">
-            <button type="submit" class="btn-primary">Dodaj wpis</button>
+            <button type="submit" class="btn-primary">Dodaj i zapisz do dostepnosc.js</button>
             <button type="button" class="btn-secondary" id="clear-all">Wyczyść wszystkie wpisy</button>
           </div>
+          <p class="hint">Przeglądarka statyczna (GitHub Pages) nie ma bezpośredniego zapisu na serwer bez autoryzacji – po zmianie kliknij „Zapisz bezpośrednio do dostepnosc.js” (Chrome/Edge) lub „Pobierz dostepnosc.js” i wyślij plik do repozytorium.</p>
         </form>
       </div>
 
       <div class="card">
-        <h2>Lista wpisów</h2>
+        <h2>Lista wpisów z dostepnosc.js</h2>
         <div class="bookings-list" id="bookings-list"></div>
       </div>
     </div>
 
     <div class="card export-box">
-      <h3>Eksport do pliku <code>dostepnosc.js</code></h3>
-      <p style="color: var(--muted); font-size: 0.92rem;">Skopiuj poniższy kod, jeśli chcesz na stałe opublikować aktualne terminy w repozytorium GitHub pod adresem <code>https://ziachu00.github.io/sloneczna11/dostepnosc.js</code>.</p>
+      <h3>Zawartość pliku <code>dostepnosc.js</code></h3>
+      <p style="color: var(--muted); font-size: 0.92rem;">Podgląd i zapis aktualnej zawartości <code>https://ziachu00.github.io/sloneczna11/dostepnosc.js</code>.</p>
       <textarea id="js-export" readonly></textarea>
       <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
-        <button type="button" class="btn-secondary" id="copy-js">Kopiuj kod dostepnosc.js</button>
-        <span class="status-msg" id="copy-status"></span>
+        <button type="button" class="btn-primary" id="save-file-direct">Zapisz bezpośrednio do dostepnosc.js</button>
+        <button type="button" class="btn-secondary" id="download-js">Pobierz dostepnosc.js</button>
+        <button type="button" class="btn-secondary" id="copy-js">Kopiuj kod</button>
+        <span class="status-msg" id="save-status"></span>
       </div>
     </div>
   </main>
 
   <script src="https://ziachu00.github.io/sloneczna11/dostepnosc.js"></script>
   <script>
-    const STORAGE_KEY = 'sloneczna11_bookings_v1';
-    let bookings = loadBookings();
+    let fileHandle = null;
 
     function normalizeExternalData() {
       const candidate =
@@ -293,56 +300,90 @@
         window.terminy ||
         window.zajeteTerminy;
 
-      if (Array.isArray(candidate)) {
-        return candidate
-          .map((item, idx) => {
-            if (typeof item === 'string') {
-              return { id: 'ext-' + idx, from: item, to: item, label: 'Zajęte' };
+      if (!Array.isArray(candidate)) return [];
+
+      return candidate
+        .map((item, idx) => {
+          if (typeof item === 'string') {
+            return { id: 'ext-' + idx, from: item, to: item, label: 'Zajęte' };
+          }
+          if (item && typeof item === 'object') {
+            const from = item.from || item.start || item.od || item.date;
+            const to = item.to || item.end || item.do || from;
+            if (from && to) {
+              return {
+                id: item.id || ('ext-' + idx),
+                from: String(from).slice(0, 10),
+                to: String(to).slice(0, 10),
+                label: item.label || item.opis || item.title || item.status || 'Zajęte'
+              };
             }
-            if (item && typeof item === 'object') {
-              const from = item.from || item.start || item.od || item.date;
-              const to = item.to || item.end || item.do || from;
-              if (from && to) {
-                return {
-                  id: item.id || ('ext-' + idx),
-                  from: String(from).slice(0, 10),
-                  to: String(to).slice(0, 10),
-                  label: item.label || item.opis || item.title || item.status || 'Zajęte'
-                };
-              }
-            }
-            return null;
-          })
-          .filter(Boolean);
-      }
-      return [];
+          }
+          return null;
+        })
+        .filter(Boolean);
     }
 
-    function loadBookings() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
-        }
-      } catch (err) {}
-      return normalizeExternalData();
-    }
+    let bookings = normalizeExternalData();
 
-    function saveBookings() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-      } catch (err) {}
-      renderExport();
-    }
-
-    function renderExport() {
+    function buildDostepnoscJsContent() {
       const cleanList = [...bookings]
         .sort((a, b) => a.from.localeCompare(b.from))
         .map(({ from, to, label }) => ({ from, to, label: label || 'Zajęte' }));
 
-      const jsText = `window.dostepnosc = ${JSON.stringify(cleanList, null, 2)};`;
-      document.getElementById('js-export').value = jsText;
+      return `window.dostepnosc = ${JSON.stringify(cleanList, null, 2)};
+`;
+    }
+
+    function showStatus(msg) {
+      const el = document.getElementById('save-status');
+      el.textContent = msg;
+      setTimeout(() => {
+        if (el.textContent === msg) el.textContent = '';
+      }, 3000);
+    }
+
+    function downloadDostepnoscJs() {
+      const content = buildDostepnoscJsContent();
+      const blob = new Blob([content], { type: 'application/javascript;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'dostepnosc.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showStatus('Pobrano dostepnosc.js');
+    }
+
+    async function saveToDostepnoscJs() {
+      const content = buildDostepnoscJsContent();
+      if (typeof window.showSaveFilePicker === 'function') {
+        try {
+          if (!fileHandle) {
+            fileHandle = await window.showSaveFilePicker({
+              suggestedName: 'dostepnosc.js',
+              types: [{
+                description: 'Plik JavaScript',
+                accept: { 'application/javascript': ['.js'], 'text/javascript': ['.js'] }
+              }]
+            });
+          }
+          const writable = await fileHandle.createWritable();
+          await writable.write(content);
+          await writable.close();
+          showStatus('Zapisano do dostepnosc.js');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+      downloadDostepnoscJs();
+    }
+
+    function renderExport() {
+      document.getElementById('js-export').value = buildDostepnoscJsContent().trimEnd();
     }
 
     function renderBookingsList() {
@@ -350,7 +391,7 @@
       listEl.innerHTML = '';
 
       if (!bookings.length) {
-        listEl.innerHTML = '<p style="font-size:0.9rem;color:var(--muted);">Brak zapisanych wpisów rezerwacji.</p>';
+        listEl.innerHTML = '<p style="font-size:0.9rem;color:var(--muted);">Brak wpisów w dostepnosc.js.</p>';
         renderExport();
         return;
       }
@@ -370,8 +411,8 @@
         delBtn.textContent = 'Usuń';
         delBtn.addEventListener('click', () => {
           bookings = bookings.filter(b => b.id !== item.id);
-          saveBookings();
           renderBookingsList();
+          saveToDostepnoscJs();
         });
 
         row.appendChild(info);
@@ -399,24 +440,30 @@
         label: labelVal || 'Rezerwacja'
       });
 
-      saveBookings();
       renderBookingsList();
+      saveToDostepnoscJs();
       document.getElementById('booking-label').value = '';
     });
 
     document.getElementById('clear-all').addEventListener('click', () => {
       bookings = [];
-      saveBookings();
       renderBookingsList();
+      saveToDostepnoscJs();
+    });
+
+    document.getElementById('save-file-direct').addEventListener('click', () => {
+      saveToDostepnoscJs();
+    });
+
+    document.getElementById('download-js').addEventListener('click', () => {
+      downloadDostepnoscJs();
     });
 
     document.getElementById('copy-js').addEventListener('click', () => {
       const textarea = document.getElementById('js-export');
       textarea.select();
       navigator.clipboard?.writeText(textarea.value).catch(() => {});
-      const statusEl = document.getElementById('copy-status');
-      statusEl.textContent = 'Skopiowano do schowka';
-      setTimeout(() => { statusEl.textContent = ''; }, 2500);
+      showStatus('Skopiowano do schowka');
     });
 
     renderBookingsList();
