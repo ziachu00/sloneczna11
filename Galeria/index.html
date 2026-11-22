@@ -15,46 +15,28 @@
 </head>
 <body>
   <h1>Galeria</h1>
-  <ul id="file-list">Loading files...</ul>
-
-  <script>
-    const username = 'ziachu00';
-    const repo = 'sloneczna11';
-    const folder = 'Galeria';
-
-    fetch(`https://github.com{username}/${repo}/contents/${folder}`)
-      .then(async res => {
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(`HTTP ${res.status}: ${err.message}`);
-        }
-        return res.json();
-      })
-      .then(files => {
-        const list = document.getElementById('file-list');
-        list.innerHTML = '';
-
-        if (files.length <= 1) {
-          list.innerText = 'No files found in this folder.';
-          return;
-        }
-
-        files.forEach(file => {
-          if (file.name === 'index.html' || file.type !== 'file') return;
-
-          const li = document.createElement('li');
-          const sizeKB = (file.size / 1024).toFixed(1);
-          
-          li.innerHTML = `
-            <a href="./${encodeURIComponent(file.name)}" download>${file.name}</a>
-            <span class="size">${sizeKB} KB</span>
-          `;
-          list.appendChild(li);
-        });
-      })
-      .catch(error => {
-        document.getElementById('file-list').innerText = `Error: ${error.message}`;
-      });
-  </script>
+  <ul>
+    <li><a href="./2c3dadfa35e6005ec16f61079226dcd4.jpg" download>2c3dadfa35e6005ec16f61079226dcd4.jpg</a><span class="size">231.3 KB</span></li>
+    <li><a href="./34816e80503cf09806b31b530fd8252a.jpg" download>34816e80503cf09806b31b530fd8252a.jpg</a><span class="size">606.0 KB</span></li>
+    <li><a href="./39c6c7f365c85b6c095fe388973972ef.jpg" download>39c6c7f365c85b6c095fe388973972ef.jpg</a><span class="size">543.8 KB</span></li>
+    <li><a href="./418c20d7255b7de665428cfb174ed1c6.jpg" download>418c20d7255b7de665428cfb174ed1c6.jpg</a><span class="size">643.1 KB</span></li>
+    <li><a href="./4ca49f20d2bc12445cf029339c1e1574.jpg" download>4ca49f20d2bc12445cf029339c1e1574.jpg</a><span class="size">897.7 KB</span></li>
+    <li><a href="./522de956b92847c01a913f850a42d8cf.jpg" download>522de956b92847c01a913f850a42d8cf.jpg</a><span class="size">1052.8 KB</span></li>
+    <li><a href="./553b4e84e7e000e0b9329b77188b504b.jpg" download>553b4e84e7e000e0b9329b77188b504b.jpg</a><span class="size">367.3 KB</span></li>
+    <li><a href="./55f9b15677c2bfb44ce90a8a216d8e28.jpg" download>55f9b15677c2bfb44ce90a8a216d8e28.jpg</a><span class="size">887.6 KB</span></li>
+    <li><a href="./676d4183fd485f1997e8881658f4e00f.jpg" download>676d4183fd485f1997e8881658f4e00f.jpg</a><span class="size">1012.0 KB</span></li>
+    <li><a href="./716adabe62a2f915065fc7eed4f30fa4.jpg" download>716adabe62a2f915065fc7eed4f30fa4.jpg</a><span class="size">855.8 KB</span></li>
+    <li><a href="./794a3f86b96a8082fdacab385a608cf0.jpg" download>794a3f86b96a8082fdacab385a608cf0.jpg</a><span class="size">316.0 KB</span></li>
+    <li><a href="./7cc844a4c66cde2aa5d88f892f8f7205.jpg" download>7cc844a4c66cde2aa5d88f892f8f7205.jpg</a><span class="size">273.9 KB</span></li>
+    <li><a href="./88f2a84eb8f64f4585f1074dcbf076a3.jpg" download>88f2a84eb8f64f4585f1074dcbf076a3.jpg</a><span class="size">328.8 KB</span></li>
+    <li><a href="./a2afba5e97dd556c10096b195828ea55.jpg" download>a2afba5e97dd556c10096b195828ea55.jpg</a><span class="size">297.4 KB</span></li>
+    <li><a href="./a2cd2be55adae95083d17b7667347725.jpg" download>a2cd2be55adae95083d17b7667347725.jpg</a><span class="size">273.5 KB</span></li>
+    <li><a href="./d41561f0d9aa30cbd4aba62d9d97486a.jpg" download>d41561f0d9aa30cbd4aba62d9d97486a.jpg</a><span class="size">855.8 KB</span></li>
+    <li><a href="./eaba92c47548c39994160f38ca1cbd10.jpg" download>eaba92c47548c39994160f38ca1cbd10.jpg</a><span class="size">909.1 KB</span></li>
+    <li><a href="./ed5097431ff1c21bfcbe95b0cffb51f0.jpg" download>ed5097431ff1c21bfcbe95b0cffb51f0.jpg</a><span class="size">293.6 KB</span></li>
+    <li><a href="./eed628daa33c41094d5f8d3969a70d2a.jpg" download>eed628daa33c41094d5f8d3969a70d2a.jpg</a><span class="size">575.2 KB</span></li>
+    <li><a href="./f0b521cc923d966dc642d6328bcb2c5d.jpg" download>f0b521cc923d966dc642d6328bcb2c5d.jpg</a><span class="size">303.5 KB</span></li>
+    <li><a href="./f84b2f0ea9b51840cfb699d4ae6ac850.jpg" download>f84b2f0ea9b51840cfb699d4ae6ac850.jpg</a><span class="size">881.4 KB</span></li>
+  </ul>
 </body>
 </html>
