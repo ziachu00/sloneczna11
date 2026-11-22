@@ -1,317 +1,556 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apartament Słoneczna 11</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --text: #1e242b;
+      --muted: #5c6672;
+      --accent: #c58b4e;
+      --accent-dark: #a67038;
+      --border: #e6e2da;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(20, 28, 38, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.2;
+    }
+
+    .container {
+      width: min(1160px, 92%);
+      margin: 0 auto;
+    }
+
+    /* Nawigacja */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 16px;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.85);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* HERO - Góra strony (podłużne zdjęcie 553b4e84e7e000e0b9329b77188b504b.jpg) */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(95deg, rgba(16, 22, 30, 0.78) 0%, rgba(16, 22, 30, 0.42) 60%, rgba(16, 22, 30, 0.25) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      padding: 72px 0;
+    }
+    .hero-tag {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #f3cfa4;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.06rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Sekcje */
+    section { padding: 72px 0; }
+    .section-head {
+      margin-bottom: 36px;
+      max-width: 680px;
+    }
+    .section-head h2 {
+      font-size: clamp(2rem, 3.5vw, 2.6rem);
+      margin-bottom: 8px;
+    }
+    .section-head p { color: var(--muted); }
+
+    /* Galeria */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #eae6df;
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 16, 22, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: #fff;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Karty */
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .card ul {
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .card ul li {
+      padding: 5px 0;
+      border-bottom: 1px dashed #eeeae2;
+    }
+    .card ul li:last-child { border-bottom: none; }
+
+    /* Sekcja informacji użytkowych + referencja łóżka */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 22px;
+    }
+    .bed-ref-box {
+      margin-top: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .bed-ref-box img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      cursor: pointer;
+    }
+
+    /* Okolica i dojazd */
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 780px) {
+      .bed-ref-box { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-800 antialiased">
+<body>
 
-  <!-- NAWIGACJA -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-stone-200">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="#" class="font-bold text-xl tracking-tight text-stone-900">
-        Słoneczna <span class="text-amber-600">11</span>
-      </a>
-      <nav class="hidden md:flex gap-6 text-sm font-medium text-stone-600">
-        <a href="#galeria" class="hover:text-amber-600 transition">Galeria</a>
-        <a href="#wyposazenie" class="hover:text-amber-600 transition">Wyposażenie</a>
-        <a href="#dostepnosc" class="hover:text-amber-600 transition">Dostępność</a>
-        <a href="#informacje" class="hover:text-amber-600 transition">Informacje</a>
-        <a href="#okolica" class="hover:text-amber-600 transition">Okolica i dojazd</a>
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">Słoneczna <span>11</span></a>
+      <nav>
+        <a href="#galeria">Galeria</a>
+        <a href="#wyposazenie">Wyposażenie</a>
+        <a href="#informacje">Informacje użytkowe</a>
+        <a href="#okolica">Okolica i dojazd</a>
       </nav>
-      <a href="#dostepnosc" class="bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold px-4 py-2 rounded-full transition">
-        Sprawdź termin
-      </a>
+      <a href="#okolica" class="btn">Kontakt i dojazd</a>
     </div>
   </header>
 
-  <!-- HERO (STRONA GŁÓWNA) -->
-  <section class="relative bg-stone-900 text-white">
-    <div class="absolute inset-0 overflow-hidden">
-      <img src="sloneczna11/DRAFT/sloneczna11com/d41561f0d9aa30cbd4aba62d9d97486a.jpg"
-           alt="Apartament Słoneczna 11"
-           class="w-full h-full object-cover opacity-55">
-    </div>
-    <div class="relative max-w-6xl mx-auto px-4 py-24 md:py-36">
-      <span class="inline-block bg-amber-500/20 border border-amber-400/30 text-amber-200 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
-        Komfortowy wypoczynek
-      </span>
-      <h1 class="text-4xl md:text-6xl font-bold max-w-2xl leading-tight mb-6">
-        Apartament Słoneczna 11
-      </h1>
-      <p class="text-lg md:text-xl text-stone-200 max-w-xl mb-8 leading-relaxed">
-        <!-- TU WSTAW OPIS ZE STRONY GŁÓWNEJ (sloneczna11com.html) -->
-        Twój prywatny azyl w spokojnej okolicy. W pełni wyposażony apartament idealny na weekendowy wyjazd lub dłuższy urlop.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="#dostepnosc" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3.5 rounded-xl transition">
-          Zobacz wolne terminy
-        </a>
-        <a href="#galeria" class="bg-white/10 hover:bg-white/20 backdrop-blur text-white font-semibold px-6 py-3.5 rounded-xl transition">
-          Obejrzyj zdjęcia
-        </a>
+  <!-- GÓRA STRONY (BANER HERO): podłużne zdjęcie zachodu słońca nad morzem -->
+  <section class="hero">
+    <img
+      class="hero-bg"
+      src="https://ziachu00.github.io/sloneczna11/Galeria/553b4e84e7e000e0b9329b77188b504b.jpg"
+      alt="Widok na morze przy zachodzie słońca – Apartament Słoneczna 11"
+    >
+    <div class="container hero-content">
+      <span class="hero-tag">Komfortowy wypoczynek nad morzem</span>
+      <h1>Apartament Słoneczna 11</h1>
+      <p>Twój prywatny azyl w spokojnej okolicy. W pełni wyposażony apartament idealny na weekendowy wyjazd lub dłuższy urlop.</p>
+      <div class="hero-actions">
+        <a href="#galeria" class="btn">Obejrzyj galerię</a>
+        <a href="#informacje" class="btn btn-outline">Informacje dla gości</a>
       </div>
     </div>
   </section>
 
-  <!-- GALERIA (PODPIĘTE TWOJE ZDJĘCIA Z REPO) -->
-  <section id="galeria" class="max-w-6xl mx-auto px-4 py-20">
-    <div class="mb-10">
-      <h2 class="text-3xl font-bold text-stone-900">Galeria apartamentu</h2>
-      <p class="text-stone-500 mt-2">Kliknij zdjęcie, aby powiększyć.</p>
-    </div>
-    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-  </section>
+  <!-- GALERIA ZDJĘĆ (łatwa edycja kolejności: wystarczy przenieść wybrane <div> w górę lub w dół) -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <h2>Galeria apartamentu</h2>
+        <p>Kliknij dowolne zdjęcie, aby powiększyć.</p>
+      </div>
 
-  <!-- LIGHTBOX DO ZDJĘĆ -->
-  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/90 items-center justify-center p-4" onclick="this.classList.add('hidden')">
-    <img id="lightbox-img" src="" class="max-h-[90vh] max-w-[95vw] rounded-lg shadow-2xl">
-  </div>
+      <div class="gallery-grid">
+        <!-- ZDJĘCIE 1 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/d41561f0d9aa30cbd4aba62d9d97486a.jpg" alt="Apartament Słoneczna 11 - zdjęcie 1" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 2 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/2c3dadfa35e6005ec16f61079226dcd4.jpg" alt="Apartament Słoneczna 11 - zdjęcie 2" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 3 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/34816e80503cf09806b31b530fd8252a.jpg" alt="Apartament Słoneczna 11 - zdjęcie 3" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 4 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/39c6c7f365c85b6c095fe388973972ef.jpg" alt="Apartament Słoneczna 11 - zdjęcie 4" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 5 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/418c20d7255b7de665428cfb174ed1c6.jpg" alt="Apartament Słoneczna 11 - zdjęcie 5" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 6 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/4ca49f20d2bc12445cf029339c1e1574.jpg" alt="Apartament Słoneczna 11 - zdjęcie 6" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 7 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/522de956b92847c01a913f850a42d8cf.jpg" alt="Apartament Słoneczna 11 - zdjęcie 7" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 8 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/55f9b15677c2bfb44ce90a8a216d8e28.jpg" alt="Apartament Słoneczna 11 - zdjęcie 8" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 9 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/676d4183fd485f1997e8881658f4e00f.jpg" alt="Apartament Słoneczna 11 - zdjęcie 9" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 10 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/716adabe62a2f915065fc7eed4f30fa4.jpg" alt="Apartament Słoneczna 11 - zdjęcie 10" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 11 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/794a3f86b96a8082fdacab385a608cf0.jpg" alt="Apartament Słoneczna 11 - zdjęcie 11" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 12 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/7cc844a4c66cde2aa5d88f892f8f7205.jpg" alt="Apartament Słoneczna 11 - zdjęcie 12" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 13 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/88f2a84eb8f64f4585f1074dcbf076a3.jpg" alt="Apartament Słoneczna 11 - zdjęcie 13" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 14 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/a2afba5e97dd556c10096b195828ea55.jpg" alt="Apartament Słoneczna 11 - zdjęcie 14" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 15 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/a2cd2be55adae95083d17b7667347725.jpg" alt="Apartament Słoneczna 11 - zdjęcie 15" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 16 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/eaba92c47548c39994160f38ca1cbd10.jpg" alt="Apartament Słoneczna 11 - zdjęcie 16" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 17 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/ed5097431ff1c21bfcbe95b0cffb51f0.jpg" alt="Apartament Słoneczna 11 - zdjęcie 17" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 18 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/eed628daa33c41094d5f8d3969a70d2a.jpg" alt="Apartament Słoneczna 11 - zdjęcie 18" loading="lazy">
+        </div>
+        <!-- ZDJĘCIE 19 -->
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="https://ziachu00.github.io/sloneczna11/Galeria/f84b2f0ea9b51840cfb699d4ae6ac850.jpg" alt="Apartament Słoneczna 11 - zdjęcie 19" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- WYPOSAŻENIE -->
-  <section id="wyposazenie" class="bg-white border-y border-stone-200 py-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-stone-900 mb-3">Wyposażenie</h2>
-      <p class="text-stone-500 mb-10">Wszystko, czego potrzebujesz podczas pobytu.</p>
-      <!-- TU WSTAW LISTĘ Z PLIKU Wyposaenie.html -->
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/70">
-          <h3 class="font-bold text-lg mb-3 text-amber-700">Salon i sypialnia</h3>
-          <ul class="space-y-2 text-stone-600 text-sm">
-            <li>• Wygodne łóżko dwuosobowe + rozkładana sofa</li>
-            <li>• Szybkie Wi-Fi oraz Smart TV</li>
-            <li>• Pościel, ręczniki, szafa na ubrania</li>
+  <section id="wyposazenie" style="background: #f3f0ea;">
+    <div class="container">
+      <div class="section-head">
+        <h2>Wyposażenie</h2>
+        <p>Wszystko, czego potrzebujesz podczas pobytu.</p>
+      </div>
+      <div class="cards-3">
+        <div class="card">
+          <h3>Salon i sypialnia</h3>
+          <ul>
+            <li>Łóżko dwuosobowe z możliwością rozłączenia + rozkładana sofa</li>
+            <li>Szybkie Wi-Fi oraz dwa telewizory (kanały cyfrowe PL)</li>
+            <li>Klimatyzacja niezależna w każdym pomieszczeniu</li>
+            <li>Pościel, ręczniki, szafa na ubrania, żelazko i deska</li>
           </ul>
         </div>
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/70">
-          <h3 class="font-bold text-lg mb-3 text-amber-700">Kuchnia i jadalnia</h3>
-          <ul class="space-y-2 text-stone-600 text-sm">
-            <li>• Płyta indukcyjna, lodówka, zmywarka</li>
-            <li>• Ekspres do kawy, czajnik, komplet naczyń</li>
-            <li>• Stół jadalniany z krzesłami</li>
+        <div class="card">
+          <h3>Kuchnia i jadalnia</h3>
+          <ul>
+            <li>Płyta indukcyjna, lodówka z zamrażalnikiem, zmywarka</li>
+            <li>Ekspres do kawy, czajnik, mikrofalówka, komplet naczyń</li>
+            <li>Stół jadalniany z krzesłami</li>
           </ul>
         </div>
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/70">
-          <h3 class="font-bold text-lg mb-3 text-amber-700">Łazienka i udogodnienia</h3>
-          <ul class="space-y-2 text-stone-600 text-sm">
-            <li>• Prysznic, pralka, suszarka do włosów</li>
-            <li>• Miejsce postojowe</li>
-            <li>• Balkon / taras wypoczynkowy</li>
+        <div class="card">
+          <h3>Łazienka i udogodnienia</h3>
+          <ul>
+            <li>Prysznic z oświetleniem 12V, pralka, suszarka do włosów</li>
+            <li>Stacja pogodowa przy wejściu (czujniki IN/OUT)</li>
+            <li>Miejsce postojowe oraz balkon / taras wypoczynkowy</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DOSTĘPNOŚĆ APARTAMENTU (KALENDARZ Z PLIKU dostepnosc.js) -->
-  <section id="dostepnosc" class="max-w-6xl mx-auto px-4 py-20">
-    <div class="grid lg:grid-cols-5 gap-10 items-start">
-      <div class="lg:col-span-3 bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-stone-900">Dostępność apartamentu</h2>
-          <div class="flex gap-2">
-            <button onclick="zmienMiesiac(-1)" class="px-3 py-1.5 rounded-lg border border-stone-300 hover:bg-stone-100 text-sm font-medium">← Poprzedni</button>
-            <button onclick="zmienMiesiac(1)" class="px-3 py-1.5 rounded-lg border border-stone-300 hover:bg-stone-100 text-sm font-medium">Następny →</button>
-          </div>
+  <!-- INFORMACJE UŻYTKOWE + ZDJĘCIE REFERENCYJNE ŁÓŻKA -->
+  <section id="informacje">
+    <div class="container">
+      <div class="section-head">
+        <h2>Informacje użytkowe</h2>
+        <p>Najważniejsze wskazówki dotyczące korzystania z apartamentu.</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="card">
+          <h3>Prąd i klimatyzacja</h3>
+          <ul>
+            <li>Po wejściu należy powiesić klucz z brelokiem na wieszaku obok domofonu, aby uruchomić prąd (po zdjęciu wyłącza się po 30 s).</li>
+            <li>Lodówka, zmywarka, stacja pogodowa oraz router Wi-Fi mają stałe zasilanie.</li>
+            <li>Klimatyzacja w każdym pokoju działa wyłącznie przy szczelnie zamkniętych oknach i włączonym zasilaniu.</li>
+          </ul>
         </div>
-        <div id="cal-header" class="text-lg font-semibold text-amber-700 mb-4 capitalize"></div>
-        <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-semibold text-stone-400 mb-2">
-          <div>Pn</div><div>Wt</div><div>Śr</div><div>Cz</div><div>Pt</div><div>So</div><div>Nd</div>
+
+        <div class="card">
+          <h3>Kuchnia i łazienka</h3>
+          <ul>
+            <li>Lodówkę ustawiamy na pozycję 1; należy pilnować dokładnego domykania drzwiczek zamrażalnika.</li>
+            <li>Kostki do zmywarki znajdują się w szufladzie pod zlewem, a kapsułki do prania i kostki przeciw kamieniowi w szafce nad pralką.</li>
+            <li>Suszarka do włosów jest w szufladzie pod umywalką.</li>
+          </ul>
         </div>
-        <div id="cal-grid" class="grid grid-cols-7 gap-1.5"></div>
-        <div class="flex gap-6 mt-6 pt-4 border-t border-stone-100 text-xs text-stone-600">
-          <span class="flex items-center gap-2"><span class="w-3 h-3 rounded bg-emerald-100 border border-emerald-400"></span> Wolny termin</span>
-          <span class="flex items-center gap-2"><span class="w-3 h-3 rounded bg-rose-100 border border-rose-300"></span> Zarezerwowany</span>
+
+        <div class="card">
+          <h3>TV, internet i wyposażenie w szafie</h3>
+          <ul>
+            <li>Darmowe Wi-Fi dostępne w całym lokalu.</li>
+            <li>Telewizory zamontowane są na stałe (prosimy nie próbować ich odchylać).</li>
+            <li>W szafie w sypialni: po prawej na dole odkurzacz, po lewej żelazko oraz deska do prasowania.</li>
+          </ul>
         </div>
       </div>
 
-      <!-- KARTA REZERWACJI -->
-      <div class="lg:col-span-2 bg-stone-900 text-white p-8 rounded-2xl shadow-lg">
-        <h3 class="text-2xl font-bold mb-2">Zapytaj o rezerwację</h3>
-        <p class="text-stone-400 text-sm mb-6">Wybierz daty lub skontaktuj się bezpośrednio, aby potwierdzić pobyt.</p>
-        <div class="space-y-4 mb-6">
-          <div>
-            <label class="block text-xs text-stone-400 mb-1">Data przyjazdu</label>
-            <input type="date" id="data-od" class="w-full bg-stone-800 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-white">
-          </div>
-          <div>
-            <label class="block text-xs text-stone-400 mb-1">Data wyjazdu</label>
-            <input type="date" id="data-do" class="w-full bg-stone-800 border border-stone-700 rounded-xl px-4 py-2.5 text-sm text-white">
-          </div>
-        </div>
-        <button onclick="wyslijZapytanie()" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-semibold py-3.5 rounded-xl transition mb-4">
-          Wyślij zapytanie e-mail
-        </button>
-        <div id="kontakt-info" class="text-sm text-stone-300 space-y-1 pt-4 border-t border-stone-800"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INFORMACJE UŻYTKOWE, ZASADY NAJMU, ZAKOŃCZENIE POBYTU -->
-  <section id="informacje" class="bg-white border-t border-stone-200 py-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-stone-900 mb-10">Ważne informacje dla gości</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- TU WSTAW TREŚĆ Z: Informacje uytkowe.html -->
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200">
-          <h3 class="font-bold text-lg text-stone-900 mb-3">Informacje użytkowe</h3>
-          <p class="text-sm text-stone-600 leading-relaxed">
-            Instrukcja odbioru kluczy, kod do domofonu, dane dostępowe do sieci Wi-Fi oraz obsługa urządzeń w apartamencie.
+      <!-- REFERENCJA DO MECHANIZMU ROZŁĄCZANIA ŁÓŻKA (f0b521cc923d966dc642d6328bcb2c5d.jpg - możesz podmienić nazwę pliku jeśli chodzi o inny z listy) -->
+      <div class="bed-ref-box">
+        <div>
+          <h3>Rozłączane łóżko w sypialni</h3>
+          <p style="color: var(--muted); margin-top: 8px;">
+            Łóżko w sypialni posiada możliwość rozłączenia (należy poinformować o takiej potrzebie przed otrzymaniem pościeli). Zasada funkcjonowania mechanizmu na zdjęciu obok:
           </p>
         </div>
-        <!-- TU WSTAW TREŚĆ Z: Zasady Najmu.html -->
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200">
-          <h3 class="font-bold text-lg text-stone-900 mb-3">Zasady najmu</h3>
-          <p class="text-sm text-stone-600 leading-relaxed">
-            Doba hotelowa, cisza nocna, zakaz palenia w apartamencie oraz zasady dotyczące pobytu ze zwierzętami.
-          </p>
-        </div>
-        <!-- TU WSTAW TREŚĆ Z: Zakoczenie pobytu.html -->
-        <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200">
-          <h3 class="font-bold text-lg text-stone-900 mb-3">Zakończenie pobytu</h3>
-          <p class="text-sm text-stone-600 leading-relaxed">
-            Prosimy o zamknięcie okien, wyłączenie urządzeń elektrycznych, segregację odpadów oraz zwrot kluczy zgodnie z instrukcją.
-          </p>
+        <div>
+          <img
+            src="https://ziachu00.github.io/sloneczna11/Galeria/f0b521cc923d966dc642d6328bcb2c5d.jpg"
+            alt="Zasada funkcjonowania mechanizmu rozłączania łóżka w sypialni"
+            onclick="openLightboxImg(this.src)"
+          >
         </div>
       </div>
     </div>
   </section>
 
-  <!-- POLECANE MIEJSCA I DOJAZD -->
-  <section id="okolica" class="max-w-6xl mx-auto px-4 py-20">
-    <div class="grid md:grid-cols-2 gap-10">
-      <!-- TU WSTAW TREŚĆ Z: Polecane miejsca.html -->
-      <div class="bg-white p-8 rounded-2xl border border-stone-200">
-        <h2 class="text-2xl font-bold text-stone-900 mb-4">Polecane miejsca w okolicy</h2>
-        <p class="text-stone-600 text-sm leading-relaxed">
+  <!-- OKOLICA I DOJAZD -->
+  <section id="okolica" style="background: #f3f0ea;">
+    <div class="container two-col">
+      <div class="card">
+        <h3>Polecane miejsca w okolicy</h3>
+        <p style="color: var(--muted);">
           Sprawdzone restauracje, kawiarnie, szlaki spacerowe, sklepy oraz lokalne atrakcje w pobliżu ul. Słonecznej 11.
         </p>
       </div>
-      <!-- TU WSTAW TREŚĆ Z: Dojazd.html -->
-      <div class="bg-white p-8 rounded-2xl border border-stone-200">
-        <h2 class="text-2xl font-bold text-stone-900 mb-4">Dojazd i lokalizacja</h2>
-        <p class="text-stone-600 text-sm leading-relaxed mb-4">
-          Wskazówki dojazdu samochodem oraz komunikacją publiczną, informacja o parkowaniu na miejscu.
+      <div class="card">
+        <h3>Dojazd i zakończenie pobytu</h3>
+        <p style="color: var(--muted);">
+          Wskazówki dojazdu samochodem oraz komunikacją publiczną, informacja o parkowaniu na miejscu. Przed wyjazdem prosimy o zamknięcie okien, wyłączenie urządzeń elektrycznych, segregację odpadów oraz zwrot kluczy zgodnie z instrukcją.
         </p>
-        <img src="sloneczna11/DRAFT/Dojazd/553b4e84e7e000e0b9329b77188b504b.jpg"
-             alt="Dojazd" class="w-full h-48 object-cover rounded-xl">
       </div>
     </div>
   </section>
 
-  <footer class="bg-stone-900 text-stone-400 py-10 text-center text-sm">
-    <p>© <span id="rok"></span> Apartament Słoneczna 11 • sloneczna11.com</p>
+  <footer>
+    <div class="container">
+      <p>© 2026 Apartament Słoneczna 11 • sloneczna11.com</p>
+    </div>
   </footer>
 
-  <!-- ŁADOWANIE DANYCH Z PLIKU dostepnosc.js -->
-  <script src="dostepnosc.js"></script>
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" aria-label="Zamknij">&times;</button>
+    <img id="lightbox-img" src="" alt="Powiększenie zdjęcia">
+  </div>
+
   <script>
-    document.getElementById('rok').textContent = new Date().getFullYear();
-
-    // Lista zdjęć z Twojego folderu Galeria
-    const zdjecia = [
-      "55f9b15677c2bfb44ce90a8a216d8e28.jpg", "f84b2f0ea9b51840cfb699d4ae6ac850.jpg",
-      "794a3f86b96a8082fdacab385a608cf0.jpg", "4ca49f20d2bc12445cf029339c1e1574.jpg",
-      "2c3dadfa35e6005ec16f61079226dcd4.jpg", "ed5097431ff1c21bfcbe95b0cffb51f0.jpg",
-      "676d4183fd485f1997e8881658f4e00f.jpg", "34816e80503cf09806b31b530fd8252a.jpg",
-      "716adabe62a2f915065fc7eed4f30fa4.jpg", "418c20d7255b7de665428cfb174ed1c6.jpg",
-      "eaba92c47548c39994160f38ca1cbd10.jpg", "88f2a84eb8f64f4585f1074dcbf076a3.jpg",
-      "f0b521cc923d966dc642d6328bcb2c5d.jpg", "a2cd2be55adae95083d17b7667347725.jpg",
-      "eed628daa33c41094d5f8d3969a70d2a.jpg", "a2afba5e97dd556c10096b195828ea55.jpg",
-      "522de956b92847c01a913f850a42d8cf.jpg", "39c6c7f365c85b6c095fe388973972ef.jpg"
-    ];
-
-    const galleryGrid = document.getElementById('gallery-grid');
-    zdjecia.forEach(plik => {
-      const src = `sloneczna11/DRAFT/Galeria/${plik}`;
-      const img = document.createElement('img');
-      img.src = src;
-      img.loading = "lazy";
-      img.className = "w-full h-44 md:h-52 object-cover rounded-xl cursor-pointer hover:opacity-90 transition shadow-sm";
-      img.onclick = () => {
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox').classList.remove('hidden');
-        document.getElementById('lightbox').classList.add('flex');
-      };
-      galleryGrid.appendChild(img);
-    });
-
-    // Renderowanie kontaktu
-    if (typeof KONTAKT !== 'undefined') {
-      document.getElementById('kontakt-info').innerHTML = `
-        <p>Tel: <a href="tel:${KONTAKT.telefon}" class="text-amber-400 hover:underline">${KONTAKT.telefon}</a></p>
-        <p>E-mail: <a href="mailto:${KONTAKT.email}" class="text-amber-400 hover:underline">${KONTAKT.email}</a></p>
-        <p>Adres: ${KONTAKT.adres}</p>
-      `;
+    function openLightbox(el) {
+      const src = el.querySelector('img').src;
+      openLightboxImg(src);
     }
-
-    // Logika kalendarza
-    let aktualnaData = new Date();
-    aktualnaData.setDate(1);
-
-    function czyZajete(dateStr) {
-      if (typeof ZAJETE_TERMINY === 'undefined') return false;
-      return ZAJETE_TERMINY.some(t => dateStr >= t.od && dateStr <= t.do);
+    function openLightboxImg(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
     }
-
-    function renderujKalendarz() {
-      const rok = aktualnaData.getFullYear();
-      const miesiac = aktualnaData.getMonth();
-      const nazwyMiesiecy = ["styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"];
-      document.getElementById('cal-header').textContent = `${nazwyMiesiecy[miesiac]} ${rok}`;
-
-      const grid = document.getElementById('cal-grid');
-      grid.innerHTML = "";
-
-      const pierwszyDzien = new Date(rok, miesiac, 1).getDay();
-      const puste = pierwszyDzien === 0 ? 6 : pierwszyDzien - 1;
-      for (let i = 0; i < puste; i++) grid.innerHTML += `<div></div>`;
-
-      const dniWMiesiacu = new Date(rok, miesiac + 1, 0).getDate();
-      for (let d = 1; d <= dniWMiesiacu; d++) {
-        const mm = String(miesiac + 1).padStart(2, '0');
-        const dd = String(d).padStart(2, '0');
-        const fullDate = `${rok}-${mm}-${dd}`;
-        const zajete = czyZajete(fullDate);
-
-        const cell = document.createElement('div');
-        cell.textContent = d;
-        cell.className = zajete
-          ? "py-2.5 text-center rounded-lg text-sm font-medium bg-rose-100 text-rose-700 border border-rose-200 line-through"
-          : "py-2.5 text-center rounded-lg text-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 cursor-pointer hover:bg-emerald-200 transition";
-        if (!zajete) {
-          cell.onclick = () => {
-            const od = document.getElementById('data-od');
-            const doEl = document.getElementById('data-do');
-            if (!od.value || (od.value && doEl.value)) { od.value = fullDate; doEl.value = ""; }
-            else if (fullDate > od.value) { doEl.value = fullDate; }
-            else { od.value = fullDate; }
-          };
-        }
-        grid.appendChild(cell);
+    function closeLightbox(e) {
+      if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
       }
     }
-
-    function zmienMiesiac(delta) {
-      aktualnaData.setMonth(aktualnaData.getMonth() + delta);
-      renderujKalendarz();
-    }
-
-    function wyslijZapytanie() {
-      const od = document.getElementById('data-od').value || "nie wybrano";
-      const doEl = document.getElementById('data-do').value || "nie wybrano";
-      const mail = (typeof KONTAKT !== 'undefined') ? KONTAKT.email : "kontakt@sloneczna11.com";
-      window.location.href = `mailto:${mail}?subject=Rezerwacja Słoneczna 11 (${od} - ${doEl})&body=Dzień dobry,%0D%0A%0D%0AChciałbym zapytać o dostępność apartamentu w terminie od ${od} do ${doEl}.`;
-    }
-
-    renderujKalendarz();
   </script>
 </body>
 </html>
