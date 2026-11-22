@@ -223,11 +223,6 @@
     .status-msg.error {
       color: #962319;
     }
-    .hint {
-      font-size: 0.84rem;
-      color: var(--muted);
-      margin-top: 10px;
-    }
 
     @media (max-width: 820px) {
       .grid-2 { grid-template-columns: 1fr; }
@@ -287,7 +282,7 @@
     <div class="card gh-box">
       <h3>Bezpośredni zapis do GitHub Pages (<code>dostepnosc.js</code>)</h3>
       <p style="color: var(--muted); font-size: 0.92rem; margin-bottom: 14px;">
-        Ustawienia zapisują się wyłącznie lokalnie w Twojej przeglądarce. Token GitHub wymaga uprawnienia <strong>Contents: Read and write</strong> dla repozytorium.
+        Klucz pobierany jest automatycznie z pliku <code>./rez.tok</code> na każdym urządzeniu (możesz też nadpisać go lokalnie w formularzu poniżej).
       </p>
       <form id="gh-config-form">
         <div class="form-row-3">
@@ -311,8 +306,8 @@
             <input type="text" id="gh-path" required>
           </div>
           <div class="field">
-            <label for="gh-token">GitHub Personal Access Token</label>
-            <input type="password" id="gh-token" placeholder="github_pat_... lub ghp_..." autocomplete="off">
+            <label for="gh-token">Nadpisanie klucza (opcjonalnie)</label>
+            <input type="password" id="gh-token" autocomplete="off" spellcheck="false">
           </div>
         </div>
 
@@ -320,6 +315,7 @@
           <button type="submit" class="btn-primary">Zapisz ustawienia</button>
           <button type="button" class="btn-secondary" id="sync-now">Zapisz teraz do dostepnosc.js</button>
           <button type="button" class="btn-secondary" id="reload-remote">Wczytaj aktualny plik z GitHuba</button>
+          <button type="button" class="btn-secondary" id="reload-tok">Przeładuj ./rez.tok</button>
           <span class="status-msg" id="gh-status"></span>
         </div>
       </form>
@@ -339,7 +335,9 @@
 
   <script src="https://ziachu00.github.io/sloneczna11/dostepnosc.js"></script>
   <script>
-    const GH_CONFIG_KEY = 'sloneczna11_gh_config_v1';
+    const GH_CONFIG_KEY = 'sloneczna11_gh_config_v2';
+    const TOK_FILE_URL = './rez.tok';
+    const CIPHER_KEY = 'sloneczna-dolina-11-2026';
 
     const DEFAULT_GH_CONFIG = {
       owner: 'ziachu00',
@@ -350,7 +348,43 @@
     };
 
     let ghConfig = loadGhConfig();
+    let tokFileToken = '';
     let currentRemoteSha = null;
+
+    function getActiveToken() {
+      return (ghConfig.token || '').trim() || tokFileToken.trim();
+    }
+
+    function decryptXorBase64(encodedStr, key) {
+      const clean = (encodedStr || '').trim();
+      if (!clean) return '';
+      const raw = decodeURIComponent(escape(atob(clean)));
+      let result = '';
+      for (let i = 0; i < raw.length; i++) {
+        result += String.fromCharCode(raw.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return result.trim();
+    }
+
+    async function loadTokenFromRezTok(showMessage = false) {
+      try {
+        const res = await fetch(`${TOK_FILE_URL}?t=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) {
+          if (showMessage) setStatus('gh-status', `Brak pliku ./rez.tok (${res.status})`, true);
+          return '';
+        }
+        const text = await res.text();
+        const decrypted = decryptXorBase64(text, CIPHER_KEY);
+        tokFileToken = decrypted;
+        if (showMessage) {
+          setStatus('gh-status', decrypted ? 'Wczytano klucz z ./rez.tok.' : 'Plik ./rez.tok jest pusty.', !decrypted);
+        }
+        return decrypted;
+      } catch (err) {
+        if (showMessage) setStatus('gh-status', `Błąd odczytu ./rez.tok: ${err.message}`, true);
+        return '';
+      }
+    }
 
     function loadGhConfig() {
       try {
@@ -459,12 +493,13 @@
     }
 
     async function fetchRemoteFileInfo() {
+      const token = getActiveToken();
       const url = `${getContentsApiUrl()}?ref=${encodeURIComponent(ghConfig.branch)}`;
       const headers = {
         'Accept': 'application/vnd.github+json'
       };
-      if (ghConfig.token) {
-        headers['Authorization'] = `Bearer ${ghConfig.token}`;
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
       }
       const res = await fetch(url, { headers, cache: 'no-store' });
       if (res.status === 404) {
@@ -499,9 +534,13 @@
     }
 
     async function pushBookingsToGitHub() {
-      if (!ghConfig.token) {
-        setStatus('action-status', 'Podaj GitHub Token w panelu poniżej, aby zapisywać bezpośrednio na GitHub Pages.', true);
-        setStatus('gh-status', 'Brak tokena GitHub.', true);
+      let token = getActiveToken();
+      if (!token) {
+        token = await loadTokenFromRezTok(false);
+      }
+      if (!token) {
+        setStatus('action-status', 'Nie znaleziono klucza w ./rez.tok ani w formularzu.', true);
+        setStatus('gh-status', 'Brak klucza dostępu.', true);
         return false;
       }
 
@@ -531,14 +570,13 @@
         let res = await fetch(getContentsApiUrl(), {
           method: 'PUT',
           headers: {
-            'Authorization': `Bearer ${ghConfig.token}`,
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github+json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
         });
 
-        // W razie konfliktu SHA odśwież SHA i ponów zapis
         if (res.status === 409) {
           await fetchRemoteFileInfo();
           if (currentRemoteSha) {
@@ -549,7 +587,7 @@
           res = await fetch(getContentsApiUrl(), {
             method: 'PUT',
             headers: {
-              'Authorization': `Bearer ${ghConfig.token}`,
+              'Authorization': `Bearer ${token}`,
               'Accept': 'application/vnd.github+json',
               'Content-Type': 'application/json'
             },
@@ -677,6 +715,11 @@
       await loadFromGitHub(true);
     });
 
+    document.getElementById('reload-tok').addEventListener('click', async () => {
+      await loadTokenFromRezTok(true);
+      await loadFromGitHub(false);
+    });
+
     document.getElementById('sync-now').addEventListener('click', () => {
       pushBookingsToGitHub();
     });
@@ -708,7 +751,10 @@
 
     fillGhForm();
     renderBookingsList();
-    loadFromGitHub(false);
+    (async () => {
+      await loadTokenFromRezTok(false);
+      await loadFromGitHub(false);
+    })();
   </script>
 </body>
 </html>
