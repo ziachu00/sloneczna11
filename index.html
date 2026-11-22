@@ -84,12 +84,12 @@
     nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 16px;
     }
     nav a {
       text-decoration: none;
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: color 0.2s;
     }
@@ -178,6 +178,213 @@
       margin-bottom: 8px;
     }
     .section-head p { color: var(--muted); }
+
+    /* Sekcja Dostępności i Kalendarza */
+    .availability-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: inline-block;
+    }
+    .swatch.free { background: #eef6ee; border-color: #b7dab7; }
+    .swatch.booked { background: #fceae8; border-color: #eab3ad; }
+    .swatch.today { background: #fdf3e4; border-color: var(--accent); }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+    .cal-month-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: capitalize;
+    }
+    .cal-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .cal-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cal-btn:hover {
+      background: var(--surface-alt);
+      border-color: var(--accent);
+    }
+
+    .cal-weekdays, .cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+    .cal-weekdays div {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+    .cal-day {
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      background: #f6f9f6;
+      color: #244728;
+    }
+    .cal-day.empty {
+      background: transparent;
+      border-color: transparent;
+    }
+    .cal-day.booked {
+      background: #fceae8;
+      border-color: #e8b4ae;
+      color: #8b261d;
+      font-weight: 600;
+    }
+    .cal-day.today {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+    .cal-day .day-note {
+      font-size: 0.65rem;
+      line-height: 1.1;
+      margin-top: 2px;
+      opacity: 0.88;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 3px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .field label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .field input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+    .btn-danger {
+      background: #fff5f4;
+      color: #962319;
+      border: 1px solid #ecc0bc;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .bookings-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .booking-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .booking-item strong { color: var(--text); display: block; }
+    .booking-item span { color: var(--muted); font-size: 0.8rem; }
 
     /* Galeria */
     .gallery-grid {
@@ -304,8 +511,13 @@
       color: var(--text);
     }
 
+    @media (max-width: 900px) {
+      .availability-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 780px) {
       .bed-ref-box { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
       .menu-toggle { display: inline-flex; }
       nav {
         display: none;
@@ -335,6 +547,7 @@
       <a href="#" class="logo">Słoneczna Dolina <span class="num-badge">11</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false">&#9776;</button>
       <nav id="main-nav">
+        <a href="#dostepnosc">Dostępność</a>
         <a href="#galeria">Galeria</a>
         <a href="#zasady">Zasady najmu</a>
         <a href="#wyposazenie">Wyposażenie</a>
@@ -357,6 +570,71 @@
       <span class="hero-tag">Twój nadmorski wypoczynek</span>
       <h1>Słoneczna Dolina <span class="num-badge">11</span></h1>
       <p>Komfortowy apartament w centrum Jastrzębiej Góry, przygotowany z myślą o spokojnym wypoczynku nad morzem.</p>
+    </div>
+  </section>
+
+  <!-- DOSTĘPNOŚĆ APARTAMENTU I KALENDARZ -->
+  <section id="dostepnosc" class="alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Dostępność apartamentu</h2>
+        <p>Sprawdź wolne terminy w kalendarzu poniżej. Wpisy rezerwacji można dodawać i aktualizować bezpośrednio w kalendarzu (zapisywane lokalnie w przeglądarce) oraz ładować z zewnętrznego pliku <code>dostepnosc.js</code>.</p>
+        <div class="legend">
+          <span class="legend-item"><span class="swatch free"></span> Termin wolny</span>
+          <span class="legend-item"><span class="swatch booked"></span> Termin zajęty</span>
+          <span class="legend-item"><span class="swatch today"></span> Dzisiaj</span>
+        </div>
+      </div>
+
+      <div class="availability-grid">
+        <div class="card">
+          <div class="cal-header">
+            <div class="cal-month-title" id="cal-month-title">Miesiąc Rok</div>
+            <div class="cal-nav">
+              <button type="button" class="cal-btn" id="cal-prev" aria-label="Poprzedni miesiąc">&larr;</button>
+              <button type="button" class="cal-btn" id="cal-today">Dziś</button>
+              <button type="button" class="cal-btn" id="cal-next" aria-label="Następny miesiąc">&rarr;</button>
+            </div>
+          </div>
+
+          <div class="cal-weekdays">
+            <div>Pn</div>
+            <div>Wt</div>
+            <div>Śr</div>
+            <div>Cz</div>
+            <div>Pt</div>
+            <div>So</div>
+            <div>Nd</div>
+          </div>
+          <div class="cal-days" id="cal-days"></div>
+        </div>
+
+        <div class="card">
+          <h3>Wpisy i rezerwacje</h3>
+          <form id="booking-form">
+            <div class="form-row">
+              <div class="field">
+                <label for="date-from">Data od</label>
+                <input type="date" id="date-from" required>
+              </div>
+              <div class="field">
+                <label for="date-to">Data do</label>
+                <input type="date" id="date-to" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="booking-label">Opis / status wpisu</label>
+              <input type="text" id="booking-label" placeholder="np. Rezerwacja – pobyt rodzinny" maxlength="60">
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+              <button type="submit" class="btn-primary">Dodaj wpis do kalendarza</button>
+              <button type="button" class="btn-secondary" id="reset-bookings">Przywróć wpisy domyślne</button>
+            </div>
+          </form>
+
+          <div class="bookings-list" id="bookings-list"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -712,6 +990,9 @@
     <img id="lightbox-img" src="" alt="Powiększenie zdjęcia">
   </div>
 
+  <!-- Zewnętrzny skrypt dostępności z repozytorium (jeśli wystawia dane lub funkcje, zostaną automatycznie odczytane) -->
+  <script src="https://ziachu00.github.io/sloneczna11/dostepnosc.js"></script>
+
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const mainNav = document.getElementById('main-nav');
@@ -741,6 +1022,213 @@
         document.getElementById('lightbox').classList.remove('open');
       }
     }
+
+    // Kalendarz dostępności i wpisy rezerwacji
+    const STORAGE_KEY = 'sloneczna11_bookings_v1';
+    const DEFAULT_BOOKINGS = [];
+
+    let viewDate = new Date();
+    viewDate.setDate(1);
+    let bookings = loadBookings();
+
+    function formatISO(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function parseISO(str) {
+      const [y, m, d] = str.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+
+    function normalizeExternalData() {
+      const candidate =
+        window.dostepnosc ||
+        window.rezerwacje ||
+        window.bookings ||
+        window.terminy ||
+        window.zajeteTerminy;
+
+      if (Array.isArray(candidate)) {
+        return candidate
+          .map((item, idx) => {
+            if (typeof item === 'string') {
+              return { id: 'ext-' + idx, from: item, to: item, label: 'Zajęte' };
+            }
+            if (item && typeof item === 'object') {
+              const from = item.from || item.start || item.od || item.date;
+              const to = item.to || item.end || item.do || from;
+              if (from && to) {
+                return {
+                  id: item.id || ('ext-' + idx),
+                  from: String(from).slice(0, 10),
+                  to: String(to).slice(0, 10),
+                  label: item.label || item.opis || item.title || item.status || 'Zajęte'
+                };
+              }
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+      return null;
+    }
+
+    function loadBookings() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch (err) {}
+      const external = normalizeExternalData();
+      return external && external.length ? external : [...DEFAULT_BOOKINGS];
+    }
+
+    function saveBookings() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+      } catch (err) {}
+    }
+
+    function findBookingForDay(isoDay) {
+      return bookings.find(b => isoDay >= b.from && isoDay <= b.to) || null;
+    }
+
+    function renderCalendar() {
+      const titleEl = document.getElementById('cal-month-title');
+      const daysEl = document.getElementById('cal-days');
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
+
+      const monthName = new Intl.DateTimeFormat('pl-PL', { month: 'long', year: 'numeric' }).format(viewDate);
+      titleEl.textContent = monthName;
+
+      const firstDay = new Date(year, month, 1);
+      // Poniedziałek = 0, Niedziela = 6
+      const startWeekday = (firstDay.getDay() + 6) % 7;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayISO = formatISO(new Date());
+
+      daysEl.innerHTML = '';
+
+      for (let i = 0; i < startWeekday; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'cal-day empty';
+        daysEl.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const current = new Date(year, month, day);
+        const iso = formatISO(current);
+        const booking = findBookingForDay(iso);
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-day' + (booking ? ' booked' : '') + (iso === todayISO ? ' today' : '');
+        cell.title = booking ? `${iso}: ${booking.label || 'Zajęte'}` : `${iso}: Wolne`;
+
+        const numSpan = document.createElement('span');
+        numSpan.textContent = day;
+        cell.appendChild(numSpan);
+
+        if (booking) {
+          const noteSpan = document.createElement('span');
+          noteSpan.className = 'day-note';
+          noteSpan.textContent = booking.label || 'Zajęte';
+          cell.appendChild(noteSpan);
+        }
+
+        daysEl.appendChild(cell);
+      }
+    }
+
+    function renderBookingsList() {
+      const listEl = document.getElementById('bookings-list');
+      listEl.innerHTML = '';
+
+      if (!bookings.length) {
+        listEl.innerHTML = '<p style="font-size:0.88rem;color:var(--muted);">Brak dodanych wpisów rezerwacji. Dodaj nowy wpis powyżej lub załaduj dane z zewnętrznego skryptu.</p>';
+        return;
+      }
+
+      const sorted = [...bookings].sort((a, b) => a.from.localeCompare(b.from));
+      sorted.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'booking-item';
+
+        const info = document.createElement('div');
+        const rangeText = item.from === item.to ? item.from : `${item.from} – ${item.to}`;
+        info.innerHTML = `<strong>${rangeText}</strong><span>${item.label || 'Zajęte'}</span>`;
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'btn-danger';
+        delBtn.textContent = 'Usuń';
+        delBtn.addEventListener('click', () => {
+          bookings = bookings.filter(b => b.id !== item.id);
+          saveBookings();
+          renderCalendar();
+          renderBookingsList();
+        });
+
+        row.appendChild(info);
+        row.appendChild(delBtn);
+        listEl.appendChild(row);
+      });
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    document.getElementById('cal-next').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    document.getElementById('cal-today').addEventListener('click', () => {
+      viewDate = new Date();
+      viewDate.setDate(1);
+      renderCalendar();
+    });
+
+    document.getElementById('booking-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fromVal = document.getElementById('date-from').value;
+      const toVal = document.getElementById('date-to').value;
+      const labelVal = document.getElementById('booking-label').value.trim();
+
+      if (!fromVal || !toVal) return;
+      const start = fromVal <= toVal ? fromVal : toVal;
+      const end = fromVal <= toVal ? toVal : fromVal;
+
+      bookings.push({
+        id: String(Date.now()) + '-' + Math.random().toString(36).slice(2, 6),
+        from: start,
+        to: end,
+        label: labelVal || 'Rezerwacja'
+      });
+
+      saveBookings();
+      renderCalendar();
+      renderBookingsList();
+      document.getElementById('booking-label').value = '';
+    });
+
+    document.getElementById('reset-bookings').addEventListener('click', () => {
+      const external = normalizeExternalData();
+      bookings = external && external.length ? external : [...DEFAULT_BOOKINGS];
+      saveBookings();
+      renderCalendar();
+      renderBookingsList();
+    });
+
+    renderCalendar();
+    renderBookingsList();
   </script>
 </body>
 </html>
