@@ -42,6 +42,15 @@
       margin: 0 auto;
     }
 
+    /* Cyfry w nagłówkach i logo – wyraźne cyfry arabskie (11), nie przypominające rzymskiego II */
+    .num-badge {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-variant-numeric: lining-nums;
+      color: var(--accent);
+    }
+
     /* Nawigacja */
     header {
       position: sticky;
@@ -64,8 +73,13 @@
       font-weight: 700;
       color: var(--text);
       text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
     }
-    .logo span { color: var(--accent); }
+    .logo .num-badge {
+      font-size: 1.25rem;
+    }
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -80,7 +94,7 @@
     }
     nav a:hover { color: var(--accent); }
 
-    /* HERO - Góra strony (podłużne zdjęcie zachodu słońca nad morzem: 553b4e84e7e000e0b9329b77188b504b.jpg) */
+    /* HERO - Góra strony: zachód słońca nad morzem (553b4e84e7e000e0b9329b77188b504b.jpg) */
     .hero {
       position: relative;
       min-height: 500px;
@@ -108,7 +122,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 660px;
+      max-width: 680px;
       padding: 72px 0;
     }
     .hero-tag {
@@ -123,6 +137,14 @@
     .hero h1 {
       font-size: clamp(2.4rem, 5vw, 3.7rem);
       margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .hero h1 .num-badge {
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      color: #f3cfa4;
     }
     .hero p {
       font-size: 1.06rem;
@@ -134,7 +156,7 @@
     section.alt { background: var(--surface-alt); }
     .section-head {
       margin-bottom: 32px;
-      max-width: 740px;
+      max-width: 760px;
     }
     .section-head h2 {
       font-size: clamp(2rem, 3.5vw, 2.55rem);
@@ -277,10 +299,10 @@
 
   <header>
     <div class="container nav-wrap">
-      <a href="#" class="logo">Słoneczna Dolina <span>11</span></a>
+      <a href="#" class="logo">Słoneczna Dolina <span class="num-badge">11</span></a>
       <nav>
         <a href="#galeria">Galeria</a>
-        <a href="#zasady">Zasady Najmu</a>
+        <a href="#zasady">Zasady najmu</a>
         <a href="#wyposazenie">Wyposażenie</a>
         <a href="#informacje">Informacje użytkowe</a>
         <a href="#dojazd">Dojazd</a>
@@ -298,9 +320,9 @@
       alt="Widok na morze przy zachodzie słońca – Słoneczna Dolina 11"
     >
     <div class="container hero-content">
-      <span class="hero-tag">Twoje miejsce odpoczynku</span>
-      <h1>Słoneczna Dolina 11</h1>
-      <p>Piękny apartament w samym sercu Jastrzębiej Góry czeka na Ciebie! :)</p>
+      <span class="hero-tag">Twój nadmorski wypoczynek</span>
+      <h1>Słoneczna Dolina <span class="num-badge">11</span></h1>
+      <p>Komfortowy apartament w centrum Jastrzębiej Góry, przygotowany z myślą o spokojnym wypoczynku nad morzem.</p>
     </div>
   </section>
 
@@ -309,7 +331,7 @@
     <div class="container">
       <div class="section-head">
         <h2>Galeria</h2>
-        <p>Kliknij zdjęcie, aby powiększyć.</p>
+        <p>Kliknij dowolne zdjęcie, aby otworzyć je w powiększeniu.</p>
       </div>
 
       <div class="gallery-grid">
@@ -397,25 +419,25 @@
   <section id="zasady" class="alt">
     <div class="container">
       <div class="section-head">
-        <h2>Zasady Najmu</h2>
+        <h2>Zasady najmu</h2>
       </div>
       <div class="grid-2">
         <div class="card">
           <h3>Warunki pobytu</h3>
-          <p>Brak opłat za sprzątanie i brak możliwości wynajęcia sprzątania (póki co). W związku ze związkiem zostawiamy apartament w stanie w jakim go zastaliśmy i w jakim chcielibyśmy go zastać przyjeżdżając następnym razem :) To podstawowy warunek wynajmu. Środki czystości znajdują się w apartamencie.</p>
+          <p>Obecnie nie pobieramy opłaty za sprzątanie i nie oferujemy usługi sprzątania w trakcie ani po pobycie. Podstawowym warunkiem wynajmu jest pozostawienie apartamentu w takim stanie, w jakim został przekazany i w jakim sami chcielibyśmy go zastać podczas kolejnego przyjazdu. Niezbędne środki czystości są dostępne na miejscu.</p>
           <ul>
-            <li>lokal pomieści maksymalnie 4 osoby</li>
-            <li>klucz, pościel oraz ręczniki wysyłam kurierem lub odbiór w Warszawie/Otrębusach (proszę o zabranie ze sobą po zakończonym pobycie)</li>
-            <li>informacje dotyczące apartamentu (parking, dostępy, itp.) zostaną przekazane po rezerwacji pobytu</li>
-            <li>można parkować tylko na wyznaczonym miejscu w garażu podziemnym, maksymalna wysokość pojazdu: 2 metry</li>
+            <li>maksymalna liczba gości w apartamencie: 4 osoby</li>
+            <li>klucz, pościel oraz ręczniki wysyłam kurierem lub przekazuję do odbioru w Warszawie / Otrębusach – proszę o ich zabranie ze sobą po zakończeniu pobytu</li>
+            <li>szczegółowe informacje organizacyjne (parking, kody i dostępy) przekazuję po potwierdzeniu rezerwacji</li>
+            <li>parkowanie dozwolone wyłącznie na wyznaczonym miejscu w garażu podziemnym (maksymalna wysokość pojazdu: 2 m)</li>
           </ul>
         </div>
         <div class="card">
-          <h3>ZAKAZ:</h3>
+          <h3>W apartamencie obowiązuje zakaz:</h3>
           <ul class="ban-list">
-            <li>- PALENIA</li>
-            <li>- SMAŻENIA RYB W APARTAMENCIE</li>
-            <li>- GRILLOWANIA NA BALKONIE</li>
+            <li>– PALENIA TYTONIU ORAZ WYROBÓW PODGRZEWANYCH</li>
+            <li>– SMAŻENIA RYB W LOKALU</li>
+            <li>– GRILLOWANIA NA BALKONIE</li>
           </ul>
         </div>
       </div>
@@ -430,37 +452,38 @@
       </div>
       <div class="grid-2">
         <div class="card">
-          <h3>Układ i udogodnienia</h3>
+          <h3>Układ pomieszczeń i udogodnienia</h3>
           <ul>
-            <li>w sypialni wygodne łóżko 160x200 (z możliwością podziału), w salonie rozkładana kanapa 120x200 (oraz dodatkowy materac dla wygody)</li>
-            <li>na balkonie dwa fotele ze stolikiem (balkon z oświetleniem)</li>
-            <li>2x rower - klucz do zamka w szafce w salonie oraz kask, pompka, zapięcie</li>
+            <li>w sypialni: łóżko 160 × 200 cm z możliwością rozdzielenia na dwa osobne łóżka</li>
+            <li>w salonie: rozkładana kanapa 120 × 200 cm oraz dodatkowy materac</li>
+            <li>balkon z oświetleniem, stolikiem i dwoma fotelami</li>
+            <li>dwa rowery – klucz do zamka znajduje się w szafce w salonie; na wyposażeniu są także kask, pompka oraz zapięcie</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Szczegółowa lista wyposażenia apartamentu:</h3>
+          <h3>Pełne wyposażenie apartamentu</h3>
           <ul>
-            <li>2x TV smart</li>
-            <li>2x klimatyzacja</li>
-            <li>płyta indukcyjna+wyciąg</li>
-            <li>ekspres do kawy (kapsułki Nescafé)</li>
+            <li>2 × telewizor Smart TV</li>
+            <li>2 × klimatyzacja</li>
+            <li>płyta indukcyjna oraz wyciąg kuchenny</li>
+            <li>ekspres do kawy (na kapsułki Nescafé)</li>
             <li>toster</li>
             <li>lodówka</li>
             <li>zmywarka</li>
-            <li>mikrofalówka</li>
+            <li>kuchenka mikrofalowa</li>
             <li>pralka</li>
             <li>odkurzacz</li>
-            <li>suszarka na ubrania (na balkon)</li>
-            <li>żelazko + deska do prasowania</li>
-            <li>parownica</li>
-            <li>parawan</li>
+            <li>suszarka na pranie (na balkon)</li>
+            <li>żelazko oraz deska do prasowania</li>
+            <li>parownica do ubrań</li>
+            <li>parawan plażowy</li>
             <li>namiot plażowy</li>
-            <li>mata/leżak plazowy</li>
+            <li>mata / leżak plażowy</li>
             <li>suszarka do włosów</li>
             <li>mop z wiadrem</li>
             <li>środki czystości</li>
-            <li>liczba kompletów ręczników (duży i mały) i pościeli dostosowana do ilości osób</li>
-            <li>komplet sztućców, szklanek, talerzy, garnków i niezbędnych przyborów kuchennych</li>
+            <li>komplety ręczników (duży i mały) oraz pościeli dopasowane do liczby gości</li>
+            <li>komplet sztućców, szklanek, talerzy, garnków i podstawowych akcesoriów kuchennych</li>
           </ul>
         </div>
       </div>
@@ -475,53 +498,53 @@
       </div>
       <div class="grid-3">
         <div class="card">
-          <h3>Prąd</h3>
+          <h3>Zasilanie i prąd</h3>
           <ul>
-            <li>po wejściu do apartamentu należy powiesić klucz z brelokiem na wieszaku obok domofonu, aby uruchomić prąd w lokalu.</li>
-            <li>jeśli usuniemy klucz z wieszaka prąd wyłączy się w ciągu 30 sekund</li>
-            <li>lodówka, zmywarka, stacja pogodowa oraz router wifi posiadają stałe zasilanie</li>
+            <li>po wejściu do apartamentu należy zawiesić klucz z brelokiem na wieszaku obok domofonu, aby włączyć zasilanie w lokalu</li>
+            <li>po zdjęciu klucza z wieszaka zasilanie wyłącza się po około 30 sekundach</li>
+            <li>lodówka, zmywarka, stacja pogodowa oraz router Wi-Fi działają na zasilaniu stałym</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Internet i TV</h3>
+          <h3>Internet i telewizja</h3>
           <ul>
-            <li>na terenie całego lokalu dostępny jest internet bezprzewodowy</li>
-            <li>apartament wyposażony jest w dwa telewizory, umożliwiające oglądanie telewizji cyfrowej (wszystkie kanały dostępne w PL)</li>
-            <li>telewizory są umieszczone na stałe, nie należy dokonywać próby ich wychylania/przechylania</li>
+            <li>w całym apartamencie dostępna jest sieć bezprzewodowa Wi-Fi</li>
+            <li>do dyspozycji są dwa telewizory z dostępem do telewizji cyfrowej (pełen pakiet kanałów dostępnych w Polsce)</li>
+            <li>telewizory zamontowane są na stałe – proszę nie próbować ich wychylać ani przechylać</li>
           </ul>
         </div>
         <div class="card">
           <h3>Klimatyzacja</h3>
           <ul>
-            <li>w każdym z pomieszczeń zainstalowana jest klimatyzacja</li>
-            <li>sterowanie poprzez panel koło włącznika światła (niezależne dla każdego z pokoi), uruchamiamy przyciskiem zasilania</li>
-            <li>warunkiem koniecznym działania klimatyzacji są szczelnie zamknięte okna oraz włączone zasilanie w apartamencie</li>
+            <li>klimatyzacja zamontowana jest w każdym pomieszczeniu</li>
+            <li>sterowanie odbywa się za pomocą panelu przy włączniku światła (niezależnie dla każdego pokoju) i uruchamia przyciskiem zasilania</li>
+            <li>warunkiem prawidłowej pracy klimatyzacji są szczelnie zamknięte okna oraz włączone zasilanie apartamentu</li>
           </ul>
         </div>
         <div class="card">
           <h3>Kuchnia</h3>
           <ul>
-            <li>lodówkę uruchamiamy przestawiając pokrętło na pozycję 1. Jest dość wydajna, więc prośba o używanie tej siły chłodzenia. Należy zwrócić uwagę czy drzwiczki zamrażalnika są dobrze zamknięte – w przeciwnym razie agregat lodówki będzie się często włączać.</li>
-            <li>zmywarka jest gotowa do użycia, kostki myjące znajdują się w szufladzie nad koszami (pod zlewem)</li>
-            <li>indukcyjna płyta grzejna uruchamiana jest przyciskiem zasilania (sterowanie dotykowe)</li>
-            <li>wyciąg kuchenny funkcjonuje po jego rozłożeniu/wyciągnięciu (wtedy też po prawej stronie będą widoczne przyciski sterowania)</li>
-            <li>czajnik oraz mikrofalówka nie wymagają mam nadzieję dodatkowych instrukcji :)</li>
+            <li>lodówkę należy ustawić pokrętłem na pozycji 1 – urządzenie jest bardzo wydajne, dlatego taki poziom chłodzenia jest w pełni wystarczający; proszę upewnić się, że drzwiczki zamrażalnika są dokładnie domknięte, aby agregat nie załączał się zbyt często</li>
+            <li>zmywarka jest gotowa do pracy – tabletki myjące znajdują się w szufladzie nad koszami (pod zlewem)</li>
+            <li>płyta indukcyjna uruchamiana jest dotykowym przyciskiem zasilania</li>
+            <li>wyciąg kuchenny działa po jego wysunięciu/rozłożeniu – przyciski sterowania znajdują się wówczas po prawej stronie</li>
+            <li>czajnik elektryczny oraz kuchenka mikrofalowa obsługiwane są standardowo</li>
           </ul>
         </div>
         <div class="card">
           <h3>Łazienka</h3>
           <ul>
             <li>suszarka do włosów znajduje się w szufladzie pod umywalką</li>
-            <li>pralka jest do dyspozycji, proszek do prania (kapsułki) oraz kostki przeciw kamieniowi znajdują się w szafce nad pralką. Bardzo proszę o używanie kostek przeciw kamieniowi przy każdym praniu</li>
-            <li>oświetlenie nad prysznicem jest w bezpiecznym standardzie 12V</li>
+            <li>pralka jest dostępna dla gości – kapsułki piorące oraz kostki zmiękczające/antykamieniowe znajdują się w szafce nad pralką; uprzejmie proszę o stosowanie kostek przeciw kamieniowi przy każdym praniu</li>
+            <li>oświetlenie strefy prysznica wykonane jest w bezpiecznym standardzie 12 V</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Inne</h3>
+          <h3>Pozostałe udogodnienia</h3>
           <ul>
-            <li>przy wejściu po prawej znajduje się stacja pogody pokazująca prognozę z internetu oraz warunki aktualne na podstawie czujników w domu (IN) oraz na zewnątrz (OUT)</li>
-            <li>odkurzacz schowany jest w sypialni w szafie na dole po prawej</li>
-            <li>żelazko o raz deska do prasowania również w szafie w sypialni, tylko po lewej</li>
+            <li>przy wejściu po prawej stronie znajduje się stacja pogodowa wyświetlająca prognozę z sieci oraz bieżące odczyty z czujników wewnętrznych (IN) i zewnętrznych (OUT)</li>
+            <li>odkurzacz znajduje się w sypialni w szafie, na dole po prawej stronie</li>
+            <li>żelazko oraz deska do prasowania również znajdują się w szafie w sypialni, po lewej stronie</li>
           </ul>
         </div>
       </div>
@@ -530,7 +553,7 @@
       <div class="bed-ref-box">
         <div>
           <h3>Rozłączanie łóżka w sypialni</h3>
-          <p>łóżko w sypialni posiada możliwość rozłączenia (należy poinformować o takiej potrzebie przed otrzymaniem pościeli). Zasada funkcjonowania mechanizmu na zdjęciu obok:</p>
+          <p>Łóżko w sypialni można rozłączyć na dwa osobne (proszę o zgłoszenie takiej potrzeby przed wydaniem pościeli). Sposób działania mechanizmu przedstawia zdjęcie obok:</p>
         </div>
         <div>
           <img
@@ -548,16 +571,16 @@
     <div class="container">
       <div class="section-head">
         <h2>Dojazd</h2>
-        <p>Niezależnie od wariantu gorąco zachęcam do sprawdzania aktualnej sytuacji drogowej na Google Maps w okolicach Trójmiasta. Pozwoli to uniknąć niespodzianek – szczególnie biorąc pod uwagę remonty.</p>
+        <p>Przed wyjazdem warto na bieżąco sprawdzić natężenie ruchu oraz ewentualne remonty w Google Maps w rejonie Trójmiasta.</p>
       </div>
       <div class="card">
-        <p><strong>z obwodnicy Trójmiasta:</strong></p>
+        <p><strong>Trasy z obwodnicy Trójmiasta:</strong></p>
         <ul>
-          <li>„klasyczna” trasa przez Redę/Rumię — <a href="https://goo.gl/maps/nLHC6iAPRuhTYvNM9" target="_blank" rel="noopener">https://goo.gl/maps/nLHC6iAPRuhTYvNM9</a></li>
-          <li>w przypadku korków zalecany objazd przez Pierwoszyno — <a href="https://goo.gl/maps/bKRLpNfejgMD1fB69" target="_blank" rel="noopener">https://goo.gl/maps/bKRLpNfejgMD1fB69</a></li>
+          <li>trasa standardowa przez Redę i Rumię — <a href="https://goo.gl/maps/nLHC6iAPRuhTYvNM9" target="_blank" rel="noopener">https://goo.gl/maps/nLHC6iAPRuhTYvNM9</a></li>
+          <li>alternatywa przy utrudnieniach: objazd przez Pierwoszyno — <a href="https://goo.gl/maps/bKRLpNfejgMD1fB69" target="_blank" rel="noopener">https://goo.gl/maps/bKRLpNfejgMD1fB69</a></li>
         </ul>
-        <p style="margin-top: 14px;">Jeśli zakorkowana jest również obwodnica, można skorzystać z tunelu pod Martwą Wisła (i przy okazji wstąpić do Baru Przystań na granicy Gdańska i Sopotu na zupę rybną i śledzie zapiekane po kartusku (nie kaszubsku!). — <a href="https://goo.gl/maps/ayXQqwuySGz5Xibv8" target="_blank" rel="noopener">https://goo.gl/maps/ayXQqwuySGz5Xibv8</a></p>
-        <p style="margin-top: 14px;">Od początku 2026 roku dostępna jest również nowa obwodnica Trójmiasta, która może jest trochę dłuższa, ale zapewnia ogromny komfort jazdy i brak korków! Uwaga - nawigacje nią nie prowadzą, trzeba samemu wybrać tą drogę! — <a href="https://maps.app.goo.gl/mR57FR6paV1oEzPn7" target="_blank" rel="noopener">https://maps.app.goo.gl/mR57FR6paV1oEzPn7</a></p>
+        <p style="margin-top: 14px;">W razie dużego ruchu na samej obwodnicy można rozważyć przejazd tunelem pod Martwą Wisłą (a po drodze odwiedzić Bar Przystań na granicy Gdańska i Sopotu na zupę rybną oraz śledzie zapiekane po kartusku – nie kaszubsku!) — <a href="https://goo.gl/maps/ayXQqwuySGz5Xibv8" target="_blank" rel="noopener">https://goo.gl/maps/ayXQqwuySGz5Xibv8</a></p>
+        <p style="margin-top: 14px;">Od początku 2026 roku funkcjonuje także nowa obwodnica Trójmiasta – trasa jest nieco dłuższa, ale pozwala uniknąć korków i zapewnia płynną jazdę. Uwaga: nawigacje nie zawsze wyznaczają ją automatycznie, dlatego warto wybrać ten odcinek samodzielnie — <a href="https://maps.app.goo.gl/mR57FR6paV1oEzPn7" target="_blank" rel="noopener">https://maps.app.goo.gl/mR57FR6paV1oEzPn7</a></p>
       </div>
     </div>
   </section>
@@ -572,46 +595,46 @@
         <div class="card">
           <h3>Śniadania</h3>
           <ul>
-            <li>w formule “All you can eat”, bardzo różnorodne – restauracja Popey (do 11)</li>
-            <li>wyborne śniadania do wyboru z karty w restauracji ToTu (do 12)</li>
-            <li>w formie wybranych posiłków w niektórych restauracjach przy głównej ulicy – ceny ok 18-35pln (tylko w sezonie)</li>
+            <li>bufet „all you can eat” z dużym wyborem – restauracja Popey (czynna do 11:00)</li>
+            <li>śniadania z karty – restauracja ToTu (czynna do 12:00)</li>
+            <li>zestawy śniadaniowe w wybranych lokalach przy głównej ulicy – orientacyjnie 18–35 zł (wyłącznie w sezonie)</li>
           </ul>
         </div>
         <div class="card">
           <h3>Zakupy</h3>
           <ul>
-            <li>Polo market, Żabka w Jastrzębiej (3 minuty spacerem), Biedronka w miejscowości Mieroszyno (5 minut samochodem)</li>
+            <li>Polo Market oraz Żabka w Jastrzębiej Górze (ok. 3 minuty pieszo), a także Biedronka w Mieroszynie (ok. 5 minut samochodem)</li>
           </ul>
         </div>
         <div class="card">
           <h3>Ryby</h3>
-          <p>Ryby – można sprawdzić lokalne wędzarnie, ale z całego serca zachęcam do krótkiej przejażdżki do :</p>
+          <p>Poza lokalnymi wędzarniami szczególnie polecam dwa sprawdzone miejsca:</p>
           <ul>
-            <li>1. Przetwory w Fishmor we Władysławowie. Rekomendacje: Śledź smażony w sosie pomidorowym, tatar z łososia, paprykarz z łososia, pasta z dorsza i oczywiście ryby wędzone.</li>
-            <li>2. Sklep firmowy Laguna w Łebczu. To kilka minut samochodem, a większość sklepów w regionie sprzedaje produkty właśnie tego producenta. Sklep firmowy w sezonie jest długo czynny, a ceny są czasami kilkukrotnie niższe. Ze swojej strony polecam paprykarza z łososia, którego sprzedają opiekanego w foremkach, ale wszystkie ich produkty są naprawdę pierwsza klasa. Można też zapakować wędzone ryby próżniowo.</li>
+            <li>1. Przetwory rybne Fishmor we Władysławowie – warto spróbować m.in. smażonego śledzia w sosie pomidorowym, tatara z łososia, paprykarza z łososia, pasty z dorsza oraz ryb wędzonych.</li>
+            <li>2. Sklep firmowy Laguna w Łebczu – oddalony o kilka minut jazdy samochodem; w sezonie jest otwarty przez wiele godzin, oferuje często znacznie korzystniejsze ceny niż w punktach pośrednich oraz pakowanie próżniowe ryb wędzonych. Szczególnie polecam zapiekany w foremkach paprykarz z łososia.</li>
           </ul>
         </div>
         <div class="card">
           <h3>Posiłki</h3>
           <ul>
-            <li>Cały rok: Kredens, U Rybaka, Papaj, Gofry u Jadzi</li>
-            <li>Sezonowo: Wędzarnia Przypiecek, DeDorsz, ToTu, Portofino (ale pizza średnia)</li>
+            <li>całoroczne: Kredens, U Rybaka, Papaj, Gofry u Jadzi</li>
+            <li>sezonowe: Wędzarnia Przypiecek, DeDorsz, ToTu, Portofino (pizza przeciętna)</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Czas wolny i %</h3>
+          <h3>Czas wolny</h3>
           <ul>
-            <li>Bowling oraz basen/SPA: Hotel Primavera</li>
-            <li>Cocktaile i drinki w Coctail Bar Maxx – to tu szkolą się barmani z całej polski! Jedyne takie miejsce. Czynne 24h/7. Jeśli nie wiesz co zamówić, poproś o koktajl owocowy i określ smak (słodki, mało słodki, kwaskowy) – barmani zrobią resztę. Dostępne również w wersji bezalkoholowej.</li>
-            <li>Dom whisky – największy zbiór whisky w Polsce</li>
+            <li>kręgle, basen oraz strefa SPA: Hotel Primavera</li>
+            <li>koktajle i drinki: Cocktail Bar Maxx – miejsce szkoleniowe dla barmanów z całej Polski, czynne całodobowo (24/7). Można poprosić o koktajl owocowy dopasowany do preferencji smakowych (słodki, wytrawniejszy, kwaskowy) – również w wariancie bezalkoholowym</li>
+            <li>Dom Whisky – jedna z największych kolekcji whisky w kraju</li>
           </ul>
         </div>
         <div class="card">
           <h3>Plaża i spacery</h3>
           <ul>
-            <li>Zejście na plażę 23 jest najbardziej wygodne ze wszystkich w okolicy, natomiast 24 najkrótsze</li>
-            <li>Ładną plażę ma też Karwia. Można podjechać samochodem lub skorzystać z komunikacji miejskiej.</li>
-            <li>W okolicy znajduje się dużo obszarów leśnych z wyznaczonymi trasami, jest co eksplorować, np. szlak pieszy "Korona Klifu"</li>
+            <li>zejście na plażę nr 23 jest najwygodniejsze w okolicy, a zejście nr 24 – najkrótsze</li>
+            <li>warto odwiedzić również plażę w Karwi (dojazd samochodem lub komunikacją lokalną)</li>
+            <li>okoliczne lasy oferują wiele wytyczonych tras spacerowych, m.in. szlak „Korona Klifu”</li>
           </ul>
         </div>
       </div>
@@ -623,20 +646,20 @@
     <div class="container">
       <div class="section-head">
         <h2>Zakończenie pobytu</h2>
-        <p>Bardzo prosimy o zapoznanie się z poniższą listą, pozwoli to utrzymać lokal w dobrym stanie :)</p>
+        <p>Przed wyjazdem proszę o wykonanie poniższych czynności, aby apartament pozostał w nienagannym stanie dla kolejnych gości.</p>
       </div>
       <div class="card">
         <ul>
-          <li>odkurzanie (szczególnie pod łóżkiem i kanapą) i jeśli taka potrzeba umycie podłóg</li>
-          <li>wyczyszczenie łazienki</li>
-          <li>wyczyszczenie kuchni</li>
-          <li>wyniesienie śmieci (również z kosza w łazience)</li>
-          <li>wyłączenie lodówki (pokrętłem na pozycję 0)</li>
-          <li>lodówkę oraz zamrażalnik pozostawiamy otwarte (usunąć lód z zamrażalnika jeśli powstał)</li>
+          <li>odkurzenie podłóg (szczególnie pod łóżkiem i kanapą) oraz – w razie potrzeby – ich umycie</li>
+          <li>posprzątanie łazienki</li>
+          <li>posprzątanie kuchni</li>
+          <li>wyrzucenie odpadów (również z łazienki)</li>
+          <li>wyłączenie lodówki (pokrętło w pozycji 0)</li>
+          <li>pozostawienie otwartych drzwi lodówki oraz zamrażalnika (po wcześniejszym usunięciu ewentualnego szronu lub lodu)</li>
           <li>opróżnienie zmywarki</li>
-          <li>wylanie wody z czajnika i z ekspresu do kawy (+ wyjęcie kapsułki po kawie)</li>
-          <li>zamknięcie okien</li>
-          <li>zabranie pościeli i ręczników oraz dywanika łazienkowego</li>
+          <li>wylanie wody z czajnika i ekspresu do kawy oraz wyjęcie zużytej kapsułki</li>
+          <li>zamknięcie wszystkich okien</li>
+          <li>zabrania pościeli, ręczników oraz dywanika łazienkowego</li>
         </ul>
       </div>
     </div>
