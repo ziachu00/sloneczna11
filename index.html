@@ -178,24 +178,14 @@
     .availability-subbox {
       margin-top: 28px;
     }
-    .availability-subbox h3 {
-      font-size: 1.65rem;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .availability-subbox p {
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
     .availability-box {
       max-width: 760px;
-      margin-top: 14px;
     }
     .legend {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-top: 10px;
+      margin-top: 14px;
       font-size: 0.9rem;
       color: var(--muted);
     }
@@ -455,9 +445,9 @@
       <a href="#" class="logo">Słoneczna Dolina <span class="num-badge">11</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false">&#9776;</button>
       <nav id="main-nav">
+        <a href="#dostepnosc">Dostępność</a>
         <a href="#galeria">Galeria</a>
         <a href="#zasady">Zasady najmu</a>
-        <a href="#dostepnosc">Dostępność</a>
         <a href="#wyposazenie">Wyposażenie</a>
         <a href="#informacje">Informacje użytkowe</a>
         <a href="#dojazd">Dojazd</a>
@@ -574,41 +564,42 @@
           </ul>
         </div>
       </div>
-
       <div id="dostepnosc" class="availability-subbox">
-        <h3>Dostępność apartamentu</h3>
+      <div class="section-head">
+        <h2>Dostępność apartamentu</h2>
         <p>Sprawdź aktualne wolne i zajęte terminy w kalendarzu poniżej.</p>
         <div class="legend">
           <span class="legend-item"><span class="swatch free"></span> Termin wolny</span>
           <span class="legend-item"><span class="swatch booked"></span> Termin zajęty</span>
           <span class="legend-item"><span class="swatch today"></span> Dzisiaj</span>
         </div>
+      </div>
 
-        <div class="availability-box">
-          <div class="card">
-            <div class="cal-header">
-              <div class="cal-month-title" id="cal-month-title">Miesiąc Rok</div>
-              <div class="cal-nav">
-                <button type="button" class="cal-btn" id="cal-prev" aria-label="Poprzedni miesiąc">&larr;</button>
-                <button type="button" class="cal-btn" id="cal-today">Dziś</button>
-                <button type="button" class="cal-btn" id="cal-next" aria-label="Następny miesiąc">&rarr;</button>
-              </div>
+      <div class="availability-box">
+        <div class="card">
+          <div class="cal-header">
+            <div class="cal-month-title" id="cal-month-title">Miesiąc Rok</div>
+            <div class="cal-nav">
+              <button type="button" class="cal-btn" id="cal-prev" aria-label="Poprzedni miesiąc">&larr;</button>
+              <button type="button" class="cal-btn" id="cal-today">Dziś</button>
+              <button type="button" class="cal-btn" id="cal-next" aria-label="Następny miesiąc">&rarr;</button>
             </div>
-
-            <div class="cal-weekdays">
-              <div>Pn</div>
-              <div>Wt</div>
-              <div>Śr</div>
-              <div>Cz</div>
-              <div>Pt</div>
-              <div>So</div>
-              <div>Nd</div>
-            </div>
-            <div class="cal-days" id="cal-days"></div>
           </div>
+
+          <div class="cal-weekdays">
+            <div>Pn</div>
+            <div>Wt</div>
+            <div>Śr</div>
+            <div>Cz</div>
+            <div>Pt</div>
+            <div>So</div>
+            <div>Nd</div>
+          </div>
+          <div class="cal-days" id="cal-days"></div>
         </div>
       </div>
     </div>
+</div>
   </section>
 
   <section id="wyposazenie">
@@ -672,3 +663,312 @@
         </div>
         <div class="card">
           <h3>Internet i telewizja</h3>
+          <ul>
+            <li>w całym apartamencie dostępna jest sieć bezprzewodowa Wi-Fi</li>
+            <li>do dyspozycji są dwa telewizory z dostępem do telewizji cyfrowej (pełen pakiet kanałów dostępnych w Polsce)</li>
+            <li>telewizory zamontowane są na stałe – proszę nie próbować ich wychylać ani przechylać</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Klimatyzacja</h3>
+          <ul>
+            <li>klimatyzacja zamontowana jest w każdym pomieszczeniu</li>
+            <li>sterowanie odbywa się za pomocą panelu przy włączniku światła (niezależnie dla każdego pokoju) i uruchamia przyciskiem zasilania</li>
+            <li>warunkiem prawidłowej pracy klimatyzacji są szczelnie zamknięte okna oraz włączone zasilanie apartamentu</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Kuchnia</h3>
+          <ul>
+            <li>lodówkę należy ustawić pokrętłem na pozycji 1 – urządzenie jest bardzo wydajne, dlatego taki poziom chłodzenia jest w pełni wystarczający; proszę upewnić się, że drzwiczki zamrażalnika są dokładnie domknięte, aby agregat nie załączał się zbyt często</li>
+            <li>zmywarka jest gotowa do pracy – tabletki myjące znajdują się w szufladzie nad koszami (pod zlewem)</li>
+            <li>płyta indukcyjna uruchamiana jest dotykowym przyciskiem zasilania</li>
+            <li>wyciąg kuchenny działa po jego wysunięciu/rozłożeniu – przyciski sterowania znajdują się wówczas po prawej stronie</li>
+            <li>czajnik elektryczny oraz kuchenka mikrofalowa obsługiwane są standardowo</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Łazienka</h3>
+          <ul>
+            <li>suszarka do włosów znajduje się w szufladzie pod umywalką</li>
+            <li>pralka jest dostępna dla gości – kapsułki piorące oraz kostki zmiękczające/antykamieniowe znajdują się w szafce nad pralką; uprzejmie proszę o stosowanie kostek przeciw kamieniowi przy każdym praniu</li>
+            <li>oświetlenie strefy prysznica wykonane jest w bezpiecznym standardzie 12 V</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Pozostałe udogodnienia</h3>
+          <ul>
+            <li>przy wejściu po prawej stronie znajduje się stacja pogodowa wyświetlająca prognozę z sieci oraz bieżące odczyty z czujników wewnętrznych (IN) i zewnętrznych (OUT)</li>
+            <li>odkurzacz znajduje się w sypialni w szafie, na dole po prawej stronie</li>
+            <li>żelazko oraz deska do prasowania również znajdują się w szafie w sypialni, po lewej stronie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bed-ref-box">
+        <div>
+          <h3>Rozłączanie łóżka w sypialni</h3>
+          <p>Łóżko w sypialni można rozłączyć na dwa osobne (proszę o zgłoszenie takiej potrzeby przed wydaniem pościeli). Sposób działania mechanizmu przedstawia zdjęcie obok:</p>
+        </div>
+        <div>
+          <img
+            src="https://ziachu00.github.io/sloneczna11/Galeria/7cc844a4c66cde2aa5d88f892f8f7205.jpg"
+            alt="Zasada funkcjonowania mechanizmu rozłączania łóżka w sypialni"
+            onclick="openLightboxImg(this.src)"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dojazd">
+    <div class="container">
+      <div class="section-head">
+        <h2>Dojazd</h2>
+        <p>Przed wyjazdem warto na bieżąco sprawdzić natężenie ruchu oraz ewentualne remonty w Google Maps w rejonie Trójmiasta.</p>
+      </div>
+      <div class="card">
+        <p><strong>Trasy z obwodnicy Trójmiasta:</strong></p>
+        <ul>
+          <li>trasa standardowa przez Redę i Rumię — <a href="https://goo.gl/maps/nLHC6iAPRuhTYvNM9" target="_blank" rel="noopener">https://goo.gl/maps/nLHC6iAPRuhTYvNM9</a></li>
+          <li>alternatywa przy utrudnieniach: objazd przez Pierwoszyno — <a href="https://goo.gl/maps/bKRLpNfejgMD1fB69" target="_blank" rel="noopener">https://goo.gl/maps/bKRLpNfejgMD1fB69</a></li>
+        </ul>
+        <p style="margin-top: 14px;">W razie dużego ruchu na samej obwodnicy można rozważyć przejazd tunelem pod Martwą Wisłą (a po drodze odwiedzić Bar Przystań na granicy Gdańska i Sopotu na zupę rybną oraz śledzie zapiekane po kartusku – nie kaszubsku!) — <a href="https://goo.gl/maps/ayXQqwuySGz5Xibv8" target="_blank" rel="noopener">https://goo.gl/maps/ayXQqwuySGz5Xibv8</a></p>
+        <p style="margin-top: 14px;">Od początku 2026 roku funkcjonuje także nowa obwodnica Trójmiasta – trasa jest nieco dłuższa, ale pozwala uniknąć korków i zapewnia płynną jazdę. Uwaga: nawigacje nie zawsze wyznaczają ją automatycznie, dlatego warto wybrać ten odcinek samodzielnie — <a href="https://maps.app.goo.gl/mR57FR6paV1oEzPn7" target="_blank" rel="noopener">https://maps.app.goo.gl/mR57FR6paV1oEzPn7</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="okolica" class="alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Polecane miejsca</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Śniadania</h3>
+          <ul>
+            <li>bufet „all you can eat” z dużym wyborem – restauracja Popey (czynna do 11:00)</li>
+            <li>śniadania z karty – restauracja ToTu (czynna do 12:00)</li>
+            <li>zestawy śniadaniowe w wybranych lokalach przy głównej ulicy – orientacyjnie 18–35 zł (wyłącznie w sezonie)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Zakupy</h3>
+          <ul>
+            <li>Polo Market oraz Żabka w Jastrzębiej Górze (ok. 3 minuty pieszo), a także Biedronka w Mieroszynie (ok. 5 minut samochodem)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ryby</h3>
+          <p>Poza lokalnymi wędzarniami szczególnie polecam dwa sprawdzone miejsca:</p>
+          <ul>
+            <li>1. Przetwory rybne Fishmor we Władysławowie – warto spróbować m.in. smażonego śledzia w sosie pomidorowym, tatara z łososia, paprykarza z łososia, pasty z dorsza oraz ryb wędzonych.</li>
+            <li>2. Sklep firmowy Laguna w Łebczu – oddalony o kilka minut jazdy samochodem; w sezonie jest otwarty przez wiele godzin, oferuje często znacznie korzystniejsze ceny niż w punktach pośrednich oraz pakowanie próżniowe ryb wędzonych. Szczególnie polecam zapiekany w foremkach paprykarz z łososia.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Posiłki</h3>
+          <ul>
+            <li>całoroczne: Kredens, U Rybaka, Papaj, Gofry u Jadzi</li>
+            <li>sezonowe: Wędzarnia Przypiecek, DeDorsz, ToTu, Portofino (pizza przeciętna)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Czas wolny</h3>
+          <ul>
+            <li>kręgle, basen oraz strefa SPA: Hotel Primavera</li>
+            <li>koktajle i drinki: Cocktail Bar Maxx – miejsce szkoleniowe dla barmanów z całej Polski, czynne całodobowo (24/7). Można poprosić o koktajl owocowy dopasowany do preferencji smakowych (słodki, wytrawniejszy, kwaskowy) – również w wariancie bezalkoholowym</li>
+            <li>Dom Whisky – jedna z największych kolekcji whisky w kraju</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Plaża i spacery</h3>
+          <ul>
+            <li>zejście na plażę nr 23 jest najwygodniejsze w okolicy, a zejście nr 24 – najkrótsze</li>
+            <li>warto odwiedzić również plażę w Karwi (dojazd samochodem lub komunikacją lokalną)</li>
+            <li>okoliczne lasy oferują wiele wytyczonych tras spacerowych, m.in. szlak „Korona Klifu”</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zakonczenie">
+    <div class="container">
+      <div class="section-head">
+        <h2>Zakończenie pobytu</h2>
+        <p>Przed wyjazdem proszę o wykonanie poniższych czynności, aby apartament pozostał w nienagannym stanie dla kolejnych gości.</p>
+      </div>
+      <div class="card">
+        <ul>
+          <li>odkurzenie podłóg (szczególnie pod łóżkiem i kanapą) oraz – w razie potrzeby – ich umycie</li>
+          <li>posprzątanie łazienki</li>
+          <li>posprzątanie kuchni</li>
+          <li>wyrzucenie odpadów (również z łazienki)</li>
+          <li>wyłączenie lodówki (pokrętło w pozycji 0)</li>
+          <li>pozostawienie otwartych drzwi lodówki oraz zamrażalnika (po wcześniejszym usunięciu ewentualnego szronu lub lodu)</li>
+          <li>opróżnienie zmywarki</li>
+          <li>wylanie wody z czajnika i ekspresu do kawy oraz wyjęcie zużytej kapsułki</li>
+          <li>zamknięcie wszystkich okien</li>
+          <li>zabrania pościeli, ręczników oraz dywanika łazienkowego</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p class="quote">"Tutaj słońce się śmieje, a fal morskich melodia nie milknie. Plaża malownicza, piasek złocisty, więc wczuj się w rytm przyrody, zatrzymaj się na chwilę lub dwie. Rozkoszuj się wolnością, niech czas zwolni..."</p>
+      <p>by ChatGPT3.5</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" aria-label="Zamknij">&times;</button>
+    <img id="lightbox-img" src="" alt="Powiększenie zdjęcia">
+  </div>
+
+  <script src="https://ziachu00.github.io/sloneczna11/dostepnosc.js"></script>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    function openLightbox(el) {
+      const src = el.querySelector('img').src;
+      openLightboxImg(src);
+    }
+    function openLightboxImg(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox(e) {
+      if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+      }
+    }
+
+    let viewDate = new Date();
+    viewDate.setDate(1);
+
+    function formatISO(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function getBookings() {
+      const candidate =
+        window.dostepnosc ||
+        window.rezerwacje ||
+        window.bookings ||
+        window.terminy ||
+        window.zajeteTerminy;
+
+      if (Array.isArray(candidate)) {
+        return candidate
+          .map((item, idx) => {
+            if (typeof item === 'string') {
+              return { id: 'ext-' + idx, from: item, to: item, label: 'Zajęte' };
+            }
+            if (item && typeof item === 'object') {
+              const from = item.from || item.start || item.od || item.date;
+              const to = item.to || item.end || item.do || from;
+              if (from && to) {
+                return {
+                  id: item.id || ('ext-' + idx),
+                  from: String(from).slice(0, 10),
+                  to: String(to).slice(0, 10),
+                  label: item.label || item.opis || item.title || item.status || 'Zajęte'
+                };
+              }
+            }
+            return null;
+          })
+          .filter(Boolean);
+      }
+      return [];
+    }
+
+    function findBookingForDay(isoDay, bookings) {
+      return bookings.find(b => isoDay >= b.from && isoDay <= b.to) || null;
+    }
+
+    function renderCalendar() {
+      const titleEl = document.getElementById('cal-month-title');
+      const daysEl = document.getElementById('cal-days');
+      const year = viewDate.getFullYear();
+      const month = viewDate.getMonth();
+      const bookings = getBookings();
+
+      titleEl.textContent = new Intl.DateTimeFormat('pl-PL', { month: 'long', year: 'numeric' }).format(viewDate);
+
+      const firstDay = new Date(year, month, 1);
+      const startWeekday = (firstDay.getDay() + 6) % 7;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayISO = formatISO(new Date());
+
+      daysEl.innerHTML = '';
+
+      for (let i = 0; i < startWeekday; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'cal-day empty';
+        daysEl.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const current = new Date(year, month, day);
+        const iso = formatISO(current);
+        const booking = findBookingForDay(iso, bookings);
+
+        const cell = document.createElement('div');
+        cell.className = 'cal-day' + (booking ? ' booked' : '') + (iso === todayISO ? ' today' : '');
+        cell.title = booking ? `${iso}: ${booking.label || 'Zajęte'}` : `${iso}: Wolne`;
+
+        const numSpan = document.createElement('span');
+        numSpan.textContent = day;
+        cell.appendChild(numSpan);
+
+        if (booking) {
+          const noteSpan = document.createElement('span');
+          noteSpan.className = 'day-note';
+          noteSpan.textContent = booking.label || 'Zajęte';
+          cell.appendChild(noteSpan);
+        }
+
+        daysEl.appendChild(cell);
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() - 1);
+      renderCalendar();
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      viewDate.setMonth(viewDate.getMonth() + 1);
+      renderCalendar();
+    });
+    document.getElementById('cal-today').addEventListener('click', () => {
+      viewDate = new Date();
+      viewDate.setDate(1);
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+</body>
+</html>
