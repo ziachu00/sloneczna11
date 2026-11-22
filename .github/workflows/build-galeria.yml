@@ -6,7 +6,10 @@ on:
     paths:
       - 'Galeria/**'
       - '.github/workflows/build-galeria.yml'
+    paths-ignore:
+      - 'Galeria/index.html'
   workflow_dispatch:
+
 
 permissions:
   contents: write
@@ -61,5 +64,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
           git add Galeria/index.html
-          git diff --staged --quiet || git commit -m "Update Galeria file list"
+          git diff --staged --quiet || git commit -m "Update Galeria file list [skip ci]"
           git push
