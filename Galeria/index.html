@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria - Files</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 8px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+    a { text-decoration: none; color: #0366d6; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+    .size { color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Galeria</h1>
+  <ul id="file-list">Loading files...</ul>
+
+  <script>
+    const username = 'ziachu00';
+    const repo = 'sloneczna11';
+    const folder = 'Galeria';
+
+    fetch(`https://github.com{username}/${repo}/contents/${folder}`)
+      .then(res => res.json())
+      .then(files => {
+        const list = document.getElementById('file-list');
+        list.innerHTML = '';
+
+        files.forEach(file => {
+          if (file.name === 'index.html' || file.type !== 'file') return;
+
+          const li = document.createElement('li');
+          const sizeKB = (file.size / 1024).toFixed(1);
+          
+          // Using relative path "./" ensures the browser downloads/opens from your GitHub Pages site
+          li.innerHTML = `
+            <a href="./${encodeURIComponent(file.name)}" download>${file.name}</a>
+            <span class="size">${sizeKB} KB</span>
+          `;
+          list.appendChild(li);
+        });
+      })
+      .catch(() => {
+        document.getElementById('file-list').innerText = 'Error loading files.';
+      });
+  </script>
+</body>
+</html>
