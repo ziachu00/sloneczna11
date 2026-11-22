@@ -42,7 +42,6 @@
       margin: 0 auto;
     }
 
-    /* Cyfry w nagłówkach i logo – wyraźne cyfry arabskie (11), nie przypominające rzymskiego II */
     .num-badge {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
@@ -51,7 +50,6 @@
       color: var(--accent);
     }
 
-    /* Nawigacja */
     header {
       position: sticky;
       top: 0;
@@ -109,7 +107,6 @@
       cursor: pointer;
     }
 
-    /* HERO - Góra strony: zachód słońca nad morzem (553b4e84e7e000e0b9329b77188b504b.jpg) */
     .hero {
       position: relative;
       min-height: 500px;
@@ -166,7 +163,6 @@
       color: rgba(255,255,255,0.92);
     }
 
-    /* Sekcje */
     section { padding: 68px 0; }
     section.alt { background: var(--surface-alt); }
     .section-head {
@@ -179,12 +175,8 @@
     }
     .section-head p { color: var(--muted); }
 
-    /* Sekcja Dostępności i Kalendarza */
-    .availability-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 24px;
-      align-items: start;
+    .availability-box {
+      max-width: 760px;
     }
     .legend {
       display: flex;
@@ -297,96 +289,6 @@
       padding: 0 3px;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      margin-bottom: 12px;
-    }
-    .field label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .field input {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.92rem;
-      color: var(--text);
-    }
-    .field input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--accent-dark); }
-    .btn-secondary {
-      background: var(--bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.84rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .btn-secondary:hover { border-color: var(--accent); }
-    .btn-danger {
-      background: #fff5f4;
-      color: #962319;
-      border: 1px solid #ecc0bc;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .bookings-list {
-      margin-top: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      max-height: 240px;
-      overflow-y: auto;
-    }
-    .booking-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      font-size: 0.88rem;
-    }
-    .booking-item strong { color: var(--text); display: block; }
-    .booking-item span { color: var(--muted); font-size: 0.8rem; }
-
-    /* Galeria */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -410,7 +312,6 @@
     }
     .gallery-item:hover img { transform: scale(1.04); }
 
-    /* Lightbox */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -439,7 +340,6 @@
       cursor: pointer;
     }
 
-    /* Karty i listy */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -511,13 +411,8 @@
       color: var(--text);
     }
 
-    @media (max-width: 900px) {
-      .availability-grid { grid-template-columns: 1fr; }
-    }
-
     @media (max-width: 780px) {
       .bed-ref-box { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
       .menu-toggle { display: inline-flex; }
       nav {
         display: none;
@@ -559,7 +454,6 @@
     </div>
   </header>
 
-  <!-- GÓRA STRONY: zachód słońca nad morzem (553b4e84e7e000e0b9329b77188b504b.jpg) -->
   <section class="hero">
     <img
       class="hero-bg"
@@ -573,12 +467,11 @@
     </div>
   </section>
 
-  <!-- DOSTĘPNOŚĆ APARTAMENTU I KALENDARZ -->
   <section id="dostepnosc" class="alt">
     <div class="container">
       <div class="section-head">
         <h2>Dostępność apartamentu</h2>
-        <p>Sprawdź wolne terminy w kalendarzu poniżej. Wpisy rezerwacji można dodawać i aktualizować bezpośrednio w kalendarzu (zapisywane lokalnie w przeglądarce) oraz ładować z zewnętrznego pliku <code>dostepnosc.js</code>.</p>
+        <p>Sprawdź aktualne wolne i zajęte terminy w kalendarzu poniżej.</p>
         <div class="legend">
           <span class="legend-item"><span class="swatch free"></span> Termin wolny</span>
           <span class="legend-item"><span class="swatch booked"></span> Termin zajęty</span>
@@ -586,7 +479,7 @@
         </div>
       </div>
 
-      <div class="availability-grid">
+      <div class="availability-box">
         <div class="card">
           <div class="cal-header">
             <div class="cal-month-title" id="cal-month-title">Miesiąc Rok</div>
@@ -608,37 +501,10 @@
           </div>
           <div class="cal-days" id="cal-days"></div>
         </div>
-
-        <div class="card">
-          <h3>Wpisy i rezerwacje</h3>
-          <form id="booking-form">
-            <div class="form-row">
-              <div class="field">
-                <label for="date-from">Data od</label>
-                <input type="date" id="date-from" required>
-              </div>
-              <div class="field">
-                <label for="date-to">Data do</label>
-                <input type="date" id="date-to" required>
-              </div>
-            </div>
-            <div class="field">
-              <label for="booking-label">Opis / status wpisu</label>
-              <input type="text" id="booking-label" placeholder="np. Rezerwacja – pobyt rodzinny" maxlength="60">
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-              <button type="submit" class="btn-primary">Dodaj wpis do kalendarza</button>
-              <button type="button" class="btn-secondary" id="reset-bookings">Przywróć wpisy domyślne</button>
-            </div>
-          </form>
-
-          <div class="bookings-list" id="bookings-list"></div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- GALERIA ZDJĘĆ (19 pozostałych zdjęć – łatwo zmienisz kolejność przesuwając bloki <div class="gallery-item">) -->
   <section id="galeria">
     <div class="container">
       <div class="section-head">
@@ -647,79 +513,60 @@
       </div>
 
       <div class="gallery-grid">
-        <!-- ZDJĘCIE 1 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/2c3dadfa35e6005ec16f61079226dcd4.jpg" alt="Słoneczna Dolina 11 – zdjęcie 1" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 2 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/34816e80503cf09806b31b530fd8252a.jpg" alt="Słoneczna Dolina 11 – zdjęcie 2" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 3 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/39c6c7f365c85b6c095fe388973972ef.jpg" alt="Słoneczna Dolina 11 – zdjęcie 3" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 4 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/418c20d7255b7de665428cfb174ed1c6.jpg" alt="Słoneczna Dolina 11 – zdjęcie 4" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 5 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/4ca49f20d2bc12445cf029339c1e1574.jpg" alt="Słoneczna Dolina 11 – zdjęcie 5" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 6 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/522de956b92847c01a913f850a42d8cf.jpg" alt="Słoneczna Dolina 11 – zdjęcie 6" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 7 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/55f9b15677c2bfb44ce90a8a216d8e28.jpg" alt="Słoneczna Dolina 11 – zdjęcie 7" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 8 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/676d4183fd485f1997e8881658f4e00f.jpg" alt="Słoneczna Dolina 11 – zdjęcie 8" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 9 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/716adabe62a2f915065fc7eed4f30fa4.jpg" alt="Słoneczna Dolina 11 – zdjęcie 9" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 10 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/794a3f86b96a8082fdacab385a608cf0.jpg" alt="Słoneczna Dolina 11 – zdjęcie 10" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 11 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/88f2a84eb8f64f4585f1074dcbf076a3.jpg" alt="Słoneczna Dolina 11 – zdjęcie 11" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 12 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/a2afba5e97dd556c10096b195828ea55.jpg" alt="Słoneczna Dolina 11 – zdjęcie 12" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 13 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/a2cd2be55adae95083d17b7667347725.jpg" alt="Słoneczna Dolina 11 – zdjęcie 13" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 14 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/d41561f0d9aa30cbd4aba62d9d97486a.jpg" alt="Słoneczna Dolina 11 – zdjęcie 14" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 15 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/eaba92c47548c39994160f38ca1cbd10.jpg" alt="Słoneczna Dolina 11 – zdjęcie 15" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 16 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/ed5097431ff1c21bfcbe95b0cffb51f0.jpg" alt="Słoneczna Dolina 11 – zdjęcie 16" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 17 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/eed628daa33c41094d5f8d3969a70d2a.jpg" alt="Słoneczna Dolina 11 – zdjęcie 17" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 18 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/f0b521cc923d966dc642d6328bcb2c5d.jpg" alt="Słoneczna Dolina 11 – zdjęcie 18" loading="lazy">
         </div>
-        <!-- ZDJĘCIE 19 -->
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="https://ziachu00.github.io/sloneczna11/Galeria/f84b2f0ea9b51840cfb699d4ae6ac850.jpg" alt="Słoneczna Dolina 11 – zdjęcie 19" loading="lazy">
         </div>
@@ -727,7 +574,6 @@
     </div>
   </section>
 
-  <!-- ZASADY NAJMU -->
   <section id="zasady" class="alt">
     <div class="container">
       <div class="section-head">
@@ -756,7 +602,6 @@
     </div>
   </section>
 
-  <!-- WYPOSAŻENIE -->
   <section id="wyposazenie">
     <div class="container">
       <div class="section-head">
@@ -802,7 +647,6 @@
     </div>
   </section>
 
-  <!-- INFORMACJE UŻYTKOWE -->
   <section id="informacje" class="alt">
     <div class="container">
       <div class="section-head">
@@ -861,7 +705,6 @@
         </div>
       </div>
 
-      <!-- MECHANIZM ROZŁĄCZANIA ŁÓŻKA: 7cc844a4c66cde2aa5d88f892f8f7205.jpg -->
       <div class="bed-ref-box">
         <div>
           <h3>Rozłączanie łóżka w sypialni</h3>
@@ -878,7 +721,6 @@
     </div>
   </section>
 
-  <!-- DOJAZD -->
   <section id="dojazd">
     <div class="container">
       <div class="section-head">
@@ -897,7 +739,6 @@
     </div>
   </section>
 
-  <!-- POLECANE MIEJSCA -->
   <section id="okolica" class="alt">
     <div class="container">
       <div class="section-head">
@@ -953,7 +794,6 @@
     </div>
   </section>
 
-  <!-- ZAKOŃCZENIE POBYTU -->
   <section id="zakonczenie">
     <div class="container">
       <div class="section-head">
@@ -984,13 +824,11 @@
     </div>
   </footer>
 
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <button class="lightbox-close" aria-label="Zamknij">&times;</button>
     <img id="lightbox-img" src="" alt="Powiększenie zdjęcia">
   </div>
 
-  <!-- Zewnętrzny skrypt dostępności z repozytorium (jeśli wystawia dane lub funkcje, zostaną automatycznie odczytane) -->
   <script src="https://ziachu00.github.io/sloneczna11/dostepnosc.js"></script>
 
   <script>
@@ -1023,24 +861,15 @@
       }
     }
 
-    // Kalendarz dostępności i wpisy rezerwacji
     const STORAGE_KEY = 'sloneczna11_bookings_v1';
-    const DEFAULT_BOOKINGS = [];
-
     let viewDate = new Date();
     viewDate.setDate(1);
-    let bookings = loadBookings();
 
     function formatISO(d) {
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, '0');
       const day = String(d.getDate()).padStart(2, '0');
       return `${y}-${m}-${day}`;
-    }
-
-    function parseISO(str) {
-      const [y, m, d] = str.split('-').map(Number);
-      return new Date(y, m - 1, d);
     }
 
     function normalizeExternalData() {
@@ -1073,10 +902,10 @@
           })
           .filter(Boolean);
       }
-      return null;
+      return [];
     }
 
-    function loadBookings() {
+    function getBookings() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
@@ -1084,17 +913,10 @@
           if (Array.isArray(parsed)) return parsed;
         }
       } catch (err) {}
-      const external = normalizeExternalData();
-      return external && external.length ? external : [...DEFAULT_BOOKINGS];
+      return normalizeExternalData();
     }
 
-    function saveBookings() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
-      } catch (err) {}
-    }
-
-    function findBookingForDay(isoDay) {
+    function findBookingForDay(isoDay, bookings) {
       return bookings.find(b => isoDay >= b.from && isoDay <= b.to) || null;
     }
 
@@ -1103,12 +925,11 @@
       const daysEl = document.getElementById('cal-days');
       const year = viewDate.getFullYear();
       const month = viewDate.getMonth();
+      const bookings = getBookings();
 
-      const monthName = new Intl.DateTimeFormat('pl-PL', { month: 'long', year: 'numeric' }).format(viewDate);
-      titleEl.textContent = monthName;
+      titleEl.textContent = new Intl.DateTimeFormat('pl-PL', { month: 'long', year: 'numeric' }).format(viewDate);
 
       const firstDay = new Date(year, month, 1);
-      // Poniedziałek = 0, Niedziela = 6
       const startWeekday = (firstDay.getDay() + 6) % 7;
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const todayISO = formatISO(new Date());
@@ -1124,7 +945,7 @@
       for (let day = 1; day <= daysInMonth; day++) {
         const current = new Date(year, month, day);
         const iso = formatISO(current);
-        const booking = findBookingForDay(iso);
+        const booking = findBookingForDay(iso, bookings);
 
         const cell = document.createElement('div');
         cell.className = 'cal-day' + (booking ? ' booked' : '') + (iso === todayISO ? ' today' : '');
@@ -1145,90 +966,25 @@
       }
     }
 
-    function renderBookingsList() {
-      const listEl = document.getElementById('bookings-list');
-      listEl.innerHTML = '';
-
-      if (!bookings.length) {
-        listEl.innerHTML = '<p style="font-size:0.88rem;color:var(--muted);">Brak dodanych wpisów rezerwacji. Dodaj nowy wpis powyżej lub załaduj dane z zewnętrznego skryptu.</p>';
-        return;
-      }
-
-      const sorted = [...bookings].sort((a, b) => a.from.localeCompare(b.from));
-      sorted.forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'booking-item';
-
-        const info = document.createElement('div');
-        const rangeText = item.from === item.to ? item.from : `${item.from} – ${item.to}`;
-        info.innerHTML = `<strong>${rangeText}</strong><span>${item.label || 'Zajęte'}</span>`;
-
-        const delBtn = document.createElement('button');
-        delBtn.type = 'button';
-        delBtn.className = 'btn-danger';
-        delBtn.textContent = 'Usuń';
-        delBtn.addEventListener('click', () => {
-          bookings = bookings.filter(b => b.id !== item.id);
-          saveBookings();
-          renderCalendar();
-          renderBookingsList();
-        });
-
-        row.appendChild(info);
-        row.appendChild(delBtn);
-        listEl.appendChild(row);
-      });
-    }
-
     document.getElementById('cal-prev').addEventListener('click', () => {
       viewDate.setMonth(viewDate.getMonth() - 1);
       renderCalendar();
     });
-
     document.getElementById('cal-next').addEventListener('click', () => {
       viewDate.setMonth(viewDate.getMonth() + 1);
       renderCalendar();
     });
-
     document.getElementById('cal-today').addEventListener('click', () => {
       viewDate = new Date();
       viewDate.setDate(1);
       renderCalendar();
     });
 
-    document.getElementById('booking-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fromVal = document.getElementById('date-from').value;
-      const toVal = document.getElementById('date-to').value;
-      const labelVal = document.getElementById('booking-label').value.trim();
-
-      if (!fromVal || !toVal) return;
-      const start = fromVal <= toVal ? fromVal : toVal;
-      const end = fromVal <= toVal ? toVal : fromVal;
-
-      bookings.push({
-        id: String(Date.now()) + '-' + Math.random().toString(36).slice(2, 6),
-        from: start,
-        to: end,
-        label: labelVal || 'Rezerwacja'
-      });
-
-      saveBookings();
-      renderCalendar();
-      renderBookingsList();
-      document.getElementById('booking-label').value = '';
-    });
-
-    document.getElementById('reset-bookings').addEventListener('click', () => {
-      const external = normalizeExternalData();
-      bookings = external && external.length ? external : [...DEFAULT_BOOKINGS];
-      saveBookings();
-      renderCalendar();
-      renderBookingsList();
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) renderCalendar();
     });
 
     renderCalendar();
-    renderBookingsList();
   </script>
 </body>
 </html>
