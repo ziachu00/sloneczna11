@@ -1,0 +1,65 @@
+name: Build Galeria Index
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'Galeria/**'
+      - '.github/workflows/build-galeria.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Galeria index.html
+        run: |
+          python3 -c '
+          import os, urllib.parse
+
+          files = sorted(f for f in os.listdir("Galeria") if os.path.isfile(os.path.join("Galeria", f)) and f != "index.html")
+          items = []
+          for f in files:
+              size_kb = os.path.getsize(os.path.join("Galeria", f)) / 1024
+              href = urllib.parse.quote(f)
+              items.append(f"    <li><a href=\"./{href}\" download>{f}</a><span class=\"size\">{size_kb:.1f} KB</span></li>")
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Galeria - Files</title>
+            <style>
+              body {{ font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }}
+              ul {{ list-style: none; padding: 0; }}
+              li {{ padding: 8px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }}
+              a {{ text-decoration: none; color: #0366d6; font-weight: 500; }}
+              a:hover {{ text-decoration: underline; }}
+              .size {{ color: #666; font-size: 0.9em; }}
+            </style>
+          </head>
+          <body>
+            <h1>Galeria</h1>
+            <ul>
+          {chr(10).join(items) if items else "    <li>No files found.</li>"}
+            </ul>
+          </body>
+          </html>"""
+
+          with open("Galeria/index.html", "w", encoding="utf-8") as out:
+              out.write(html)
+          '
+
+      - name: Commit updated index.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@://github.com"
+          git add Galeria/index.html
+          git diff --staged --quiet || git commit -m "Update Galeria file list"
+          git push
