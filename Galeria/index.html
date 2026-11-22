@@ -23,10 +23,21 @@
     const folder = 'Galeria';
 
     fetch(`https://github.com{username}/${repo}/contents/${folder}`)
-      .then(res => res.json())
+      .then(async res => {
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(`HTTP ${res.status}: ${err.message}`);
+        }
+        return res.json();
+      })
       .then(files => {
         const list = document.getElementById('file-list');
         list.innerHTML = '';
+
+        if (files.length <= 1) {
+          list.innerText = 'No files found in this folder.';
+          return;
+        }
 
         files.forEach(file => {
           if (file.name === 'index.html' || file.type !== 'file') return;
@@ -34,7 +45,6 @@
           const li = document.createElement('li');
           const sizeKB = (file.size / 1024).toFixed(1);
           
-          // Using relative path "./" ensures the browser downloads/opens from your GitHub Pages site
           li.innerHTML = `
             <a href="./${encodeURIComponent(file.name)}" download>${file.name}</a>
             <span class="size">${sizeKB} KB</span>
@@ -42,8 +52,8 @@
           list.appendChild(li);
         });
       })
-      .catch(() => {
-        document.getElementById('file-list').innerText = 'Error loading files.';
+      .catch(error => {
+        document.getElementById('file-list').innerText = `Error: ${error.message}`;
       });
   </script>
 </body>
