@@ -56,7 +56,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 249, 246, 0.94);
+      background: rgba(250, 249, 246, 0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -66,6 +66,7 @@
       justify-content: space-between;
       padding: 15px 0;
       gap: 16px;
+      position: relative;
     }
     .logo {
       font-family: 'Cormorant Garamond', serif;
@@ -93,6 +94,20 @@
       transition: color 0.2s;
     }
     nav a:hover { color: var(--accent); }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
 
     /* HERO - Góra strony: zachód słońca nad morzem (553b4e84e7e000e0b9329b77188b504b.jpg) */
     .hero {
@@ -291,7 +306,25 @@
 
     @media (max-width: 780px) {
       .bed-ref-box { grid-template-columns: 1fr; }
-      nav { display: none; }
+      .menu-toggle { display: inline-flex; }
+      nav {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      nav.open { display: flex; }
+      nav a {
+        padding: 13px 4%;
+        border-top: 1px solid var(--border);
+        font-size: 0.98rem;
+      }
     }
   </style>
 </head>
@@ -300,7 +333,8 @@
   <header>
     <div class="container nav-wrap">
       <a href="#" class="logo">Słoneczna Dolina <span class="num-badge">11</span></a>
-      <nav>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false">&#9776;</button>
+      <nav id="main-nav">
         <a href="#galeria">Galeria</a>
         <a href="#zasady">Zasady najmu</a>
         <a href="#wyposazenie">Wyposażenie</a>
@@ -679,6 +713,21 @@
   </div>
 
   <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
     function openLightbox(el) {
       const src = el.querySelector('img').src;
       openLightboxImg(src);
